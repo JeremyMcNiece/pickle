@@ -319,6 +319,71 @@
   }
   .new-tournament-btn:hover { background: var(--accent); color: #000; }
 
+  /* Champion celebration overlay */
+  .champion-celebration {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.85);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    flex-direction: column; padding: 20px;
+    overflow: hidden;
+    animation: champ-fade-in 0.4s ease-out;
+  }
+  .champion-celebration.show { display: flex; }
+  .champ-trophy-big {
+    font-size: 180px; line-height: 1;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 40px rgba(245,166,35,0.6));
+    animation: champ-trophy-pop 0.8s cubic-bezier(.18,.89,.32,1.28) both,
+               champ-trophy-pulse 2.4s ease-in-out 0.8s infinite;
+  }
+  .champ-celeb-label {
+    font-size: 14px; font-weight: 800; letter-spacing: 5px;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 14px;
+    animation: champ-fade-up 0.5s ease-out 0.4s both;
+  }
+  .champ-celeb-name {
+    font-size: 44px; font-weight: 800; color: #fff;
+    text-align: center; line-height: 1.15;
+    text-shadow: 0 0 30px rgba(245,166,35,0.4);
+    margin-bottom: 36px; max-width: 90vw;
+    animation: champ-fade-up 0.5s ease-out 0.6s both;
+  }
+  .champ-celeb-btn {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--accent); color: #000;
+    border: none; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: transform 0.15s;
+    animation: champ-fade-up 0.5s ease-out 0.85s both;
+  }
+  .champ-celeb-btn:hover { transform: scale(1.05); }
+  .champ-confetti {
+    position: absolute; top: -60px; font-size: 26px;
+    pointer-events: none;
+    animation: champ-confetti-fall linear forwards;
+  }
+  @keyframes champ-fade-in {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes champ-fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes champ-trophy-pop {
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    60% { transform: scale(1.25) rotate(8deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  @keyframes champ-trophy-pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.06) rotate(-4deg); }
+    75% { transform: scale(1.06) rotate(4deg); }
+  }
+  @keyframes champ-confetti-fall {
+    to { transform: translateY(110vh) rotate(720deg); }
+  }
+
   /* Score modal */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
@@ -494,6 +559,10 @@
     .champion-display { padding: 30px 16px; }
     .champion-trophy { font-size: 52px; }
     .champion-name { font-size: 26px; }
+    .champ-trophy-big { font-size: 130px; }
+    .champ-celeb-name { font-size: 32px; }
+    .champ-celeb-label { font-size: 12px; letter-spacing: 4px; }
+    .champ-confetti { font-size: 22px; }
   }
 </style>
 </head>
@@ -573,6 +642,14 @@
       <button class="reset-btn" onclick="resetAllStats()">Reset All Stats</button>
     </div>
   </div>
+</div>
+
+<!-- ═══ CHAMPION CELEBRATION ═══ -->
+<div class="champion-celebration" id="champion-celebration" onclick="closeChampionCelebration()">
+  <div class="champ-trophy-big">🏆</div>
+  <div class="champ-celeb-label">Champion</div>
+  <div class="champ-celeb-name" id="champ-celeb-name"></div>
+  <button class="champ-celeb-btn" onclick="event.stopPropagation(); closeChampionCelebration()">Continue</button>
 </div>
 
 <!-- ═══ WINNER MODAL ═══ -->
@@ -1063,6 +1140,7 @@ function createSlot(playerName, match, slotNum, roundIdx, matchIdx) {
   return slot;
 }
 
+let _lastChampion = null;
 function checkChampion() {
   if (!tournament) return;
   const totalRounds = tournament.rounds.length;
@@ -1071,8 +1149,40 @@ function checkChampion() {
   if (finalMatch.winner) {
     champDisplay.classList.remove('hidden');
     document.getElementById('champion-name').textContent = finalMatch.winner;
+    if (_lastChampion !== finalMatch.winner) {
+      _lastChampion = finalMatch.winner;
+      showChampionCelebration(finalMatch.winner);
+    }
   } else {
     champDisplay.classList.add('hidden');
+    _lastChampion = null;
+  }
+}
+
+function showChampionCelebration(name) {
+  document.getElementById('champ-celeb-name').textContent = name;
+  const overlay = document.getElementById('champion-celebration');
+  overlay.querySelectorAll('.champ-confetti').forEach(c => c.remove());
+  overlay.classList.add('show');
+  spawnConfetti(overlay);
+}
+
+function closeChampionCelebration() {
+  const overlay = document.getElementById('champion-celebration');
+  overlay.classList.remove('show');
+  overlay.querySelectorAll('.champ-confetti').forEach(c => c.remove());
+}
+
+function spawnConfetti(parent) {
+  const emojis = ['🎉','🎊','⭐','🏆','✨','🥳'];
+  for (let i = 0; i < 30; i++) {
+    const c = document.createElement('div');
+    c.className = 'champ-confetti';
+    c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    c.style.left = Math.random() * 100 + '%';
+    c.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+    c.style.animationDelay = Math.random() * 1.5 + 's';
+    parent.appendChild(c);
   }
 }
 
