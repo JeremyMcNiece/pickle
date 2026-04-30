@@ -442,9 +442,58 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 600px) {
-    .app-header { flex-direction: column; gap: 10px; }
+    .app-header { flex-direction: column; gap: 10px; padding: 12px 16px; }
+    .app-header h1 { font-size: 18px; }
+    .app-header h1 span { font-size: 22px; }
+    .nav-tab { padding: 7px 14px; font-size: 13px; }
     .setup-container { padding: 0 4px; }
     .match-slot { padding: 8px 10px; font-size: 12px; }
+
+    .screen { padding: 14px 10px; }
+    .stats-container { padding-top: 4px; }
+    .stats-toggle { margin-bottom: 14px; }
+    .stats-toggle-btn { font-size: 12px; padding: 9px 6px; }
+
+    .leaderboard-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .leaderboard-table th { padding: 8px 6px; font-size: 10px; letter-spacing: 0.5px; }
+    .leaderboard-table td { padding: 10px 6px; font-size: 13px; }
+    .leaderboard-table .rank { width: 28px; padding-left: 8px; }
+    .leaderboard-table th:first-child,
+    .leaderboard-table td:first-child { padding-left: 8px; }
+    .leaderboard-table th:last-child,
+    .leaderboard-table td:last-child { padding-right: 8px; }
+
+    .week-history-item { padding: 14px 12px; }
+    .week-history-item h3 { font-size: 15px; }
+    .week-history-item .week-date { font-size: 11px; }
+    .week-history-item .week-champ { font-size: 13px; padding: 5px 12px; }
+    .week-history-item .week-results { font-size: 12px; }
+
+    .reset-section { flex-direction: column; align-items: stretch; gap: 8px; }
+    .reset-btn { width: 100%; }
+
+    .empty-stats { padding: 40px 16px; }
+    .empty-stats .icon { font-size: 40px; }
+    .empty-stats p { font-size: 14px; }
+
+    .bracket-header h2 { font-size: 18px; }
+    .bracket-header .week-info { font-size: 12px; }
+    .bracket-header .format-badge { font-size: 10px; padding: 2px 8px; }
+    .bracket-wrapper { padding: 6px 0 16px; }
+    .bracket-labels, .bracket-grid { padding: 0 6px; }
+    .bracket-labels .round-label { font-size: 9px; letter-spacing: 1px; padding: 6px 0; }
+    .match-slot {
+      padding: 6px 8px; font-size: 11px; min-height: 30px;
+      overflow: hidden;
+    }
+    .match-slot .player-name {
+      min-width: 0; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+    .match-slot .score-badge { font-size: 9px; margin-left: 4px; }
+    .champion-display { padding: 30px 16px; }
+    .champion-trophy { font-size: 52px; }
+    .champion-name { font-size: 26px; }
   }
 </style>
 </head>
@@ -812,19 +861,27 @@ function renderBracket() {
   // ── Grid setup ──
   const matchesPerSide = rounds[0].length / 2;
   const gridRows = matchesPerSide * 2;
-  const rowHeight = Math.max(50, Math.min(90, 500 / gridRows));
+  const isMobile = window.innerWidth <= 600;
+  const isTiny = window.innerWidth <= 380;
+  const rowHeight = isMobile
+    ? Math.max(40, Math.min(70, 420 / gridRows))
+    : Math.max(50, Math.min(90, 500 / gridRows));
   const totalCols = 4 * numSideRounds + 1;
+
+  const roundColW = isTiny ? 'minmax(68px, 1fr)' : isMobile ? 'minmax(82px, 1fr)' : 'minmax(150px, 1fr)';
+  const finalColW = isTiny ? 'minmax(76px, 1fr)' : isMobile ? 'minmax(92px, 1fr)' : 'minmax(160px, 1fr)';
+  const connW = isMobile ? '18px' : '36px';
 
   // Column widths: [round, conn, round, conn, ...] FINAL [..., conn, round, conn, round]
   const colWidths = [];
   for (let i = 0; i < numSideRounds; i++) {
-    colWidths.push('minmax(150px, 1fr)'); // round
-    colWidths.push('36px'); // connector
+    colWidths.push(roundColW); // round
+    colWidths.push(connW); // connector
   }
-  colWidths.push('minmax(160px, 1fr)'); // final
+  colWidths.push(finalColW); // final
   for (let i = 0; i < numSideRounds; i++) {
-    colWidths.push('36px'); // connector
-    colWidths.push('minmax(150px, 1fr)'); // round
+    colWidths.push(connW); // connector
+    colWidths.push(roundColW); // round
   }
   const colTemplate = colWidths.join(' ');
 
@@ -1258,6 +1315,16 @@ function showScreen(name) {
 // ─── INIT ───
 initPlayerInputs();
 validateSetup();
+
+let _resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(() => {
+    if (tournament && document.getElementById('screen-bracket').classList.contains('active')) {
+      renderBracket();
+    }
+  }, 150);
+});
 </script>
 </body>
 </html>
