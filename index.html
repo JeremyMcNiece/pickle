@@ -1310,6 +1310,7 @@ function showScreen(name) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-tab')[['setup', 'bracket', 'stats'].indexOf(name)].classList.add('active');
   if (name === 'stats') showStatsView('lifetime');
+  if (name === 'bracket' && tournament) renderBracket();
 }
 
 // ─── INIT ───
@@ -1317,13 +1318,19 @@ initPlayerInputs();
 validateSetup();
 
 let _resizeTimer;
-window.addEventListener('resize', () => {
+function _handleViewportChange() {
   clearTimeout(_resizeTimer);
   _resizeTimer = setTimeout(() => {
     if (tournament && document.getElementById('screen-bracket').classList.contains('active')) {
       renderBracket();
     }
-  }, 150);
+  }, 200);
+}
+window.addEventListener('resize', _handleViewportChange);
+window.addEventListener('orientationchange', () => {
+  // iOS sometimes reports stale dimensions in the immediate handler;
+  // wait for the layout to settle, then re-render.
+  setTimeout(_handleViewportChange, 250);
 });
 </script>
 </body>
