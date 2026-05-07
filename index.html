@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,72 +9,67 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --bg: #1a1d23;
-    --bg2: #22262e;
-    --bg3: #2a2f38;
-    --card: #2e333d;
-    --card-hover: #363b47;
-    --accent: #f5a623;
-    --accent2: #e8941e;
-    --green: #4caf50;
-    --red: #e74c3c;
-    --text: #e8e8e8;
-    --text2: #9a9faa;
-    --text3: #6b7080;
-    --border: #3a3f4a;
-    --connector: #4a4f5a;
-    --winner-bg: #2d4a2d;
-    --loser-bg: #4a2d2d;
+  /* ─── THEME VARIABLES ─── */
+  [data-theme="dark"] {
+    --bg: #1a1d23; --bg2: #22262e; --bg3: #2a2f38;
+    --card: #2e333d; --card-hover: #363b47;
+    --accent: #f5a623; --accent2: #e8941e;
+    --green: #4caf50; --red: #e74c3c;
+    --text: #e8e8e8; --text2: #9a9faa; --text3: #6b7080;
+    --border: #3a3f4a; --connector: #4a4f5a;
+    --winner-bg: #2d4a2d; --loser-bg: #4a2d2d;
+    --modal-bg: rgba(0,0,0,0.7); --shadow: rgba(0,0,0,0.4);
+  }
+  [data-theme="light"] {
+    --bg: #f0f2f5; --bg2: #ffffff; --bg3: #e4e7ec;
+    --card: #ffffff; --card-hover: #f7f8fa;
+    --accent: #e8941e; --accent2: #d4820f;
+    --green: #2e7d32; --red: #c62828;
+    --text: #1a1d23; --text2: #5a6070; --text3: #8a8f9a;
+    --border: #d0d5dd; --connector: #b0b5c0;
+    --winner-bg: #d4edda; --loser-bg: #f8d7da;
+    --modal-bg: rgba(0,0,0,0.4); --shadow: rgba(0,0,0,0.12);
   }
 
   body {
     font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; transition: background 0.3s, color 0.3s;
   }
 
   /* ─── HEADER ─── */
   .app-header {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 16px 24px; display: flex; align-items: center;
+    justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    transition: background 0.3s;
   }
   .app-header h1 {
-    font-size: 22px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 22px; font-weight: 800;
+    display: flex; align-items: center; gap: 10px;
   }
   .app-header h1 span { font-size: 26px; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
   .nav-tabs {
-    display: flex;
-    gap: 4px;
-    background: var(--bg);
-    border-radius: 10px;
-    padding: 4px;
+    display: flex; gap: 4px; background: var(--bg);
+    border-radius: 10px; padding: 4px;
   }
   .nav-tab {
-    padding: 8px 18px;
-    border-radius: 8px;
-    border: none;
-    background: transparent;
-    color: var(--text2);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+    padding: 8px 18px; border-radius: 8px; border: none;
+    background: transparent; color: var(--text2); font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
   }
   .nav-tab.active { background: var(--accent); color: #000; }
   .nav-tab:hover:not(.active) { color: var(--text); background: var(--bg3); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg); color: var(--text2); font-size: 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
   /* ─── SCREENS ─── */
   .screen { display: none; padding: 24px; }
@@ -83,37 +78,22 @@
   /* ─── SETUP SCREEN ─── */
   .setup-container { max-width: 600px; margin: 0 auto; padding-top: 20px; }
   .setup-section {
-    background: var(--bg2);
-    border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
+    background: var(--bg2); border-radius: 14px; padding: 24px;
+    margin-bottom: 20px; border: 1px solid var(--border); transition: background 0.3s;
   }
   .setup-section h2 {
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 13px;
+    font-weight: 700; margin-bottom: 16px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1px; font-size: 13px;
   }
   .format-toggle { display: flex; gap: 8px; }
   .format-btn {
-    flex: 1;
-    padding: 14px;
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    background: var(--bg);
-    color: var(--text2);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
+    flex: 1; padding: 14px; border-radius: 10px;
+    border: 2px solid var(--border); background: var(--bg);
+    color: var(--text2); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; text-align: center;
   }
   .format-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--accent); color: var(--accent);
     background: rgba(245,166,35,0.08);
   }
   .format-btn small { display: block; font-size: 11px; font-weight: 400; margin-top: 4px; color: var(--text3); }
@@ -127,7 +107,7 @@
   .player-input-row input {
     flex: 1; padding: 10px 14px; border-radius: 8px;
     border: 1px solid var(--border); background: var(--bg);
-    color: var(--text); font-size: 14px; font-family: inherit;
+    color: var(--text); font-size: 16px; font-family: inherit;
     outline: none; transition: border-color 0.2s;
   }
   .player-input-row input:focus { border-color: var(--accent); }
@@ -138,7 +118,8 @@
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: all 0.2s; flex-shrink: 0;
   }
-  .remove-player-btn:hover { background: var(--red); color: #fff; }
+  .remove-player-btn:hover:not(:disabled) { background: var(--red); color: #fff; }
+  .remove-player-btn:disabled { opacity: 0.25; cursor: not-allowed; }
 
   .add-player-btn {
     width: 100%; padding: 10px; border-radius: 8px;
@@ -147,6 +128,12 @@
     cursor: pointer; transition: all 0.2s; margin-top: 4px;
   }
   .add-player-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .setup-checkbox {
+    display: flex; align-items: center; gap: 10px; margin-top: 16px;
+    cursor: pointer; font-size: 14px; color: var(--text2);
+  }
+  .setup-checkbox input { accent-color: var(--accent); width: 18px; height: 18px; cursor: pointer; }
 
   .start-btn {
     width: 100%; padding: 16px; border-radius: 12px; border: none;
@@ -157,8 +144,7 @@
   .start-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
   .doubles-note {
-    background: rgba(245,166,35,0.08);
-    border: 1px solid rgba(245,166,35,0.2);
+    background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2);
     border-radius: 8px; padding: 10px 14px; font-size: 12px;
     color: var(--accent); margin-bottom: 16px; line-height: 1.5;
   }
@@ -172,47 +158,39 @@
     font-size: 11px; font-weight: 700; padding: 3px 10px;
     border-radius: 20px; margin-left: 8px; text-transform: uppercase;
   }
+  .bracket-actions {
+    display: flex; justify-content: center; gap: 8px; margin-top: 10px;
+  }
+  .bracket-action-btn {
+    padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text2); font-size: 12px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .bracket-action-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   .bracket-wrapper { overflow-x: auto; padding: 10px 0 20px; }
 
-  /* Labels row */
   .bracket-labels {
-    display: grid;
-    margin-bottom: 8px;
-    padding: 0 20px;
+    display: grid; margin-bottom: 8px; padding: 0 20px;
   }
   .bracket-labels .round-label {
-    text-align: center;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text3);
-    padding: 8px 0;
+    text-align: center; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text3); padding: 8px 0;
   }
 
-  /* Bracket grid */
-  .bracket-grid {
-    display: grid;
-    padding: 0 20px;
-  }
+  .bracket-grid { display: grid; padding: 0 20px; }
 
   /* Matchups */
   .matchup { position: relative; }
 
   .match-slot {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 10px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: default;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 36px;
-    white-space: nowrap;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 10px 14px; font-size: 13px; font-weight: 500;
+    cursor: default; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 36px; white-space: nowrap; overflow: hidden;
   }
   .match-slot:first-child { border-radius: 6px 6px 0 0; }
   .match-slot:last-child { border-radius: 0 0 6px 6px; border-top: 1px solid var(--bg); }
@@ -222,84 +200,79 @@
 
   .match-slot.clickable { cursor: pointer; }
   .match-slot.clickable:hover {
-    background: var(--card-hover);
-    border-color: var(--accent);
-    z-index: 2;
-    position: relative;
+    background: var(--card-hover); border-color: var(--accent);
+    z-index: 2; position: relative;
   }
 
   .match-slot.winner {
-    background: var(--winner-bg);
-    border-color: var(--green);
-    color: #7bed7b;
-    font-weight: 700;
+    background: var(--winner-bg); border-color: var(--green);
+    color: var(--green); font-weight: 700;
   }
   .match-slot.loser {
-    background: var(--loser-bg);
-    opacity: 0.6;
-    text-decoration: line-through;
+    background: var(--loser-bg); opacity: 0.6; text-decoration: line-through;
   }
 
-  .match-slot .player-name { flex: 1; }
+  .match-slot .player-name {
+    flex: 1; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis;
+  }
   .match-slot .score-badge {
     font-size: 10px; font-weight: 700; color: var(--accent); margin-left: 8px;
   }
 
-  /* ─── BRACKET CONNECTORS ─── */
-  .bracket-conn {
-    position: relative;
+  /* Advance animation */
+  @keyframes advanceIn {
+    from { opacity: 0; transform: translateX(-8px); }
+    to { opacity: 1; transform: translateX(0); }
   }
+  .match-slot.just-advanced { animation: advanceIn 0.4s ease-out; }
 
-  /* Left bracket: ─┐ ├─ ─┘ */
+  /* ─── BRACKET CONNECTORS ─── */
+  .bracket-conn { position: relative; }
+
   .bracket-conn-left::before {
-    content: '';
-    position: absolute;
-    top: 25%;
-    bottom: 25%;
-    left: 0;
-    right: 50%;
+    content: ''; position: absolute;
+    top: 25%; bottom: 25%; left: 0; right: 50%;
     border-top: 2px solid var(--connector);
     border-right: 2px solid var(--connector);
     border-bottom: 2px solid var(--connector);
   }
   .bracket-conn-left::after {
-    content: '';
-    position: absolute;
-    top: calc(50% - 1px);
-    left: calc(50% - 1px);
-    right: 0;
+    content: ''; position: absolute;
+    top: calc(50% - 1px); left: calc(50% - 1px); right: 0;
     border-top: 2px solid var(--connector);
   }
 
-  /* Right bracket: ┌─ ─┤ └─ */
   .bracket-conn-right::before {
-    content: '';
-    position: absolute;
-    top: 25%;
-    bottom: 25%;
-    left: 50%;
-    right: 0;
+    content: ''; position: absolute;
+    top: 25%; bottom: 25%; left: 50%; right: 0;
     border-top: 2px solid var(--connector);
     border-left: 2px solid var(--connector);
     border-bottom: 2px solid var(--connector);
   }
   .bracket-conn-right::after {
-    content: '';
-    position: absolute;
-    top: calc(50% - 1px);
-    left: 0;
-    right: calc(50% - 1px);
+    content: ''; position: absolute;
+    top: calc(50% - 1px); left: 0; right: calc(50% - 1px);
     border-top: 2px solid var(--connector);
   }
 
-  /* Simple horizontal line connector */
   .bracket-conn-line::before {
-    content: '';
-    position: absolute;
-    top: calc(50% - 1px);
-    left: 0;
-    right: 0;
+    content: ''; position: absolute;
+    top: calc(50% - 1px); left: 0; right: 0;
     border-top: 2px solid var(--connector);
+  }
+
+  /* ─── CONSOLATION BRACKET ─── */
+  .consolation-section {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 2px dashed var(--border);
+  }
+  .consolation-section h3 {
+    text-align: center; font-size: 18px; font-weight: 700;
+    margin-bottom: 6px; color: var(--text2);
+  }
+  .consolation-section .consolation-subtitle {
+    text-align: center; font-size: 12px; color: var(--text3); margin-bottom: 16px;
   }
 
   /* Champion */
@@ -319,28 +292,27 @@
   }
   .new-tournament-btn:hover { background: var(--accent); color: #000; }
 
-  /* Champion celebration overlay */
+  /* Champion celebration */
   .champion-celebration {
     display: none; position: fixed; inset: 0; z-index: 1000;
     background: rgba(0,0,0,0.85);
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     align-items: center; justify-content: center;
-    flex-direction: column; padding: 20px;
-    overflow: hidden;
+    flex-direction: column; padding: 20px; overflow: hidden;
     animation: champ-fade-in 0.4s ease-out;
   }
   .champion-celebration.show { display: flex; }
+  .champion-celebration.leaving { animation: champ-fade-out 0.4s ease forwards; pointer-events: none; }
+  @keyframes champ-fade-out { to { opacity: 0; } }
   .champ-trophy-big {
-    font-size: 180px; line-height: 1;
-    margin-bottom: 12px;
+    font-size: 180px; line-height: 1; margin-bottom: 12px;
     filter: drop-shadow(0 0 40px rgba(245,166,35,0.6));
     animation: champ-trophy-pop 0.8s cubic-bezier(.18,.89,.32,1.28) both,
                champ-trophy-pulse 2.4s ease-in-out 0.8s infinite;
   }
   .champ-celeb-label {
     font-size: 14px; font-weight: 800; letter-spacing: 5px;
-    color: var(--accent); text-transform: uppercase;
-    margin-bottom: 14px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
     animation: champ-fade-up 0.5s ease-out 0.4s both;
   }
   .champ-celeb-name {
@@ -352,20 +324,17 @@
   }
   .champ-celeb-btn {
     padding: 14px 36px; border-radius: 12px;
-    background: var(--accent); color: #000;
-    border: none; font-size: 15px; font-weight: 700;
-    cursor: pointer; transition: transform 0.15s;
+    background: var(--accent); color: #000; border: none;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: transform 0.15s;
     animation: champ-fade-up 0.5s ease-out 0.85s both;
   }
   .champ-celeb-btn:hover { transform: scale(1.05); }
   .champ-confetti {
     position: absolute; top: -60px; font-size: 26px;
-    pointer-events: none;
-    animation: champ-confetti-fall linear forwards;
+    pointer-events: none; animation: champ-confetti-fall linear forwards;
   }
-  @keyframes champ-fade-in {
-    from { opacity: 0; } to { opacity: 1; }
-  }
+  @keyframes champ-fade-in { from { opacity: 0; } to { opacity: 1; } }
   @keyframes champ-fade-up {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -380,23 +349,23 @@
     25% { transform: scale(1.06) rotate(-4deg); }
     75% { transform: scale(1.06) rotate(4deg); }
   }
-  @keyframes champ-confetti-fall {
-    to { transform: translateY(110vh) rotate(720deg); }
-  }
+  @keyframes champ-confetti-fall { to { transform: translateY(110vh) rotate(720deg); } }
 
-  /* Score modal */
+  /* ─── SCORE MODAL ─── */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7); z-index: 200;
+    background: var(--modal-bg); z-index: 200;
     align-items: center; justify-content: center;
   }
   .modal-overlay.active { display: flex; }
   .modal {
     background: var(--bg2); border: 1px solid var(--border);
     border-radius: 16px; padding: 28px; min-width: 340px; max-width: 90vw;
+    transition: background 0.3s;
   }
   .modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; text-align: center; }
   .modal-match { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
   .modal-player {
     display: flex; align-items: center; gap: 10px; padding: 12px 16px;
     background: var(--bg); border-radius: 10px; border: 2px solid var(--border);
@@ -411,6 +380,38 @@
     text-align: center; font-size: 12px; font-weight: 700;
     color: var(--text3); text-transform: uppercase; letter-spacing: 2px;
   }
+
+  /* Score inputs in modal */
+  .score-entry {
+    display: flex; align-items: center; gap: 10px;
+    justify-content: center; margin-bottom: 16px;
+  }
+  .score-entry .score-side {
+    display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1;
+  }
+  .score-entry .score-side label {
+    font-size: 11px; font-weight: 600; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .score-entry .score-input {
+    width: 64px; padding: 10px; border-radius: 8px;
+    border: 2px solid var(--border); background: var(--bg);
+    color: var(--text); font-size: 22px; font-weight: 700;
+    text-align: center; font-family: inherit; outline: none;
+    transition: border-color 0.2s;
+  }
+  .score-entry .score-input:focus { border-color: var(--accent); }
+  .score-entry .score-dash { font-size: 24px; font-weight: 700; color: var(--text3); }
+
+  .score-hint {
+    text-align: center; font-size: 11px; color: var(--text3); margin-bottom: 16px;
+  }
+  .score-divider {
+    text-align: center; font-size: 11px; font-weight: 700; color: var(--text3);
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+
   .modal-actions { display: flex; gap: 8px; }
   .modal-actions button {
     flex: 1; padding: 12px; border-radius: 10px; border: none;
@@ -421,6 +422,49 @@
   .modal-confirm { background: var(--accent); color: #000; }
   .modal-confirm:hover { background: var(--accent2); }
   .modal-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ─── PLAYER PROFILE MODAL ─── */
+  .profile-modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: var(--modal-bg); z-index: 300;
+    align-items: center; justify-content: center;
+  }
+  .profile-modal-overlay.active { display: flex; }
+  .profile-modal {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; width: 380px; max-width: 90vw;
+  }
+  .profile-close {
+    float: right; background: none; border: none; color: var(--text3);
+    font-size: 22px; cursor: pointer; line-height: 1;
+  }
+  .profile-close:hover { color: var(--text); }
+  .profile-name { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .profile-title { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+  .profile-stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;
+  }
+  .profile-stat-box {
+    background: var(--bg); border-radius: 10px; padding: 12px; text-align: center;
+    border: 1px solid var(--border);
+  }
+  .profile-stat-val { font-size: 24px; font-weight: 800; }
+  .profile-stat-val.green { color: var(--green); }
+  .profile-stat-val.red { color: var(--red); }
+  .profile-stat-val.gold { color: var(--accent); }
+  .profile-stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .profile-h2h-title { font-size: 13px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .profile-h2h-list { max-height: 180px; overflow-y: auto; }
+  .profile-h2h-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px; border-radius: 8px; margin-bottom: 4px;
+    background: var(--bg); font-size: 13px;
+  }
+  .profile-h2h-row .opp { font-weight: 600; }
+  .profile-h2h-row .record { font-weight: 700; }
+  .profile-h2h-row .record.positive { color: var(--green); }
+  .profile-h2h-row .record.negative { color: var(--red); }
+  .profile-h2h-row .record.even { color: var(--accent); }
 
   /* ─── STATS SCREEN ─── */
   .stats-container { max-width: 700px; margin: 0 auto; padding-top: 10px; }
@@ -450,10 +494,12 @@
   .leaderboard-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
   .leaderboard-table tr:last-child td { border-bottom: none; }
   .leaderboard-table .rank { font-weight: 800; color: var(--accent); width: 40px; }
-  .leaderboard-table .player-cell { font-weight: 600; }
+  .leaderboard-table .player-cell { font-weight: 600; cursor: pointer; }
+  .leaderboard-table .player-cell:hover { color: var(--accent); text-decoration: underline; }
   .leaderboard-table .wins-cell { color: var(--green); font-weight: 700; }
   .leaderboard-table .losses-cell { color: var(--red); font-weight: 700; }
   .leaderboard-table .champ-cell { color: var(--accent); font-weight: 700; }
+  .leaderboard-table .streak-cell { font-weight: 700; font-size: 12px; }
 
   .week-history-item {
     background: var(--bg2); border: 1px solid var(--border);
@@ -474,6 +520,18 @@
     margin-top: 10px; font-size: 13px; color: var(--text2); line-height: 1.6;
   }
 
+  /* H2H view */
+  .h2h-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;
+  }
+  .h2h-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; cursor: pointer; transition: all 0.2s;
+  }
+  .h2h-card:hover { border-color: var(--accent); }
+  .h2h-card-name { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .h2h-card-record { font-size: 12px; color: var(--text2); }
+
   .reset-section {
     margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);
     display: flex; gap: 10px; justify-content: center;
@@ -489,20 +547,46 @@
   .empty-stats .icon { font-size: 48px; margin-bottom: 12px; }
   .empty-stats p { font-size: 15px; }
 
-  /* ─── UNDO BAR ─── */
-  .undo-bar {
-    display: none; position: fixed; bottom: 24px; left: 50%;
-    transform: translateX(-50%); background: var(--bg2);
-    border: 1px solid var(--border); border-radius: 12px;
-    padding: 10px 16px; align-items: center; gap: 12px;
-    z-index: 150; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  /* Bracket empty state */
+  .bracket-empty {
+    text-align: center; padding: 80px 20px; color: var(--text3);
+    max-width: 420px; margin: 0 auto;
   }
-  .undo-bar.active { display: flex; }
-  .undo-bar span { font-size: 13px; color: var(--text2); }
-  .undo-btn {
+  .bracket-empty .icon { font-size: 64px; margin-bottom: 16px; }
+  .bracket-empty p { font-size: 16px; margin-bottom: 24px; line-height: 1.5; }
+  .bracket-empty button {
+    padding: 12px 28px; border-radius: 10px; border: 2px solid var(--accent);
+    background: var(--accent); color: #000; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .bracket-empty button:hover { background: var(--accent2); border-color: var(--accent2); }
+
+  /* ─── TOAST ─── */
+  .toast-container {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 500; display: flex; flex-direction: column-reverse; gap: 8px;
+    align-items: center; pointer-events: none;
+  }
+  .toast {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+    padding: 10px 16px; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 8px 32px var(--shadow); pointer-events: auto;
+    animation: toast-in 0.3s ease-out;
+    max-width: 90vw;
+  }
+  .toast.leaving { animation: toast-out 0.3s ease-in forwards; }
+  .toast span { font-size: 13px; color: var(--text2); white-space: nowrap; }
+  .toast .toast-action {
     padding: 6px 14px; border-radius: 6px; border: none;
     background: var(--accent); color: #000; font-size: 12px;
-    font-weight: 700; cursor: pointer;
+    font-weight: 700; cursor: pointer; flex-shrink: 0;
+  }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes toast-out {
+    to { opacity: 0; transform: translateY(10px); }
   }
 
   /* ─── RESPONSIVE ─── */
@@ -510,6 +594,7 @@
     .app-header { flex-direction: column; gap: 10px; padding: 12px 16px; }
     .app-header h1 { font-size: 18px; }
     .app-header h1 span { font-size: 22px; }
+    .header-right { width: 100%; justify-content: space-between; }
     .nav-tab { padding: 7px 14px; font-size: 13px; }
     .setup-container { padding: 0 4px; }
     .match-slot { padding: 8px 10px; font-size: 12px; }
@@ -523,10 +608,6 @@
     .leaderboard-table th { padding: 8px 6px; font-size: 10px; letter-spacing: 0.5px; }
     .leaderboard-table td { padding: 10px 6px; font-size: 13px; }
     .leaderboard-table .rank { width: 28px; padding-left: 8px; }
-    .leaderboard-table th:first-child,
-    .leaderboard-table td:first-child { padding-left: 8px; }
-    .leaderboard-table th:last-child,
-    .leaderboard-table td:last-child { padding-right: 8px; }
 
     .week-history-item { padding: 14px 12px; }
     .week-history-item h3 { font-size: 15px; }
@@ -547,14 +628,8 @@
     .bracket-wrapper { padding: 6px 0 16px; }
     .bracket-labels, .bracket-grid { padding: 0 6px; }
     .bracket-labels .round-label { font-size: 9px; letter-spacing: 1px; padding: 6px 0; }
-    .match-slot {
-      padding: 6px 8px; font-size: 11px; min-height: 30px;
-      overflow: hidden;
-    }
-    .match-slot .player-name {
-      min-width: 0; overflow: hidden;
-      text-overflow: ellipsis; white-space: nowrap;
-    }
+    .match-slot { padding: 6px 8px; font-size: 11px; min-height: 30px; overflow: hidden; }
+    .match-slot .player-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .match-slot .score-badge { font-size: 9px; margin-left: 4px; }
     .champion-display { padding: 30px 16px; }
     .champion-trophy { font-size: 52px; }
@@ -563,21 +638,31 @@
     .champ-celeb-name { font-size: 32px; }
     .champ-celeb-label { font-size: 12px; letter-spacing: 4px; }
     .champ-confetti { font-size: 22px; }
+
+    .score-entry .score-input { width: 52px; font-size: 18px; padding: 8px; }
+    .profile-modal { padding: 20px; }
+    .profile-stats-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .profile-stat-box { padding: 8px; }
+    .profile-stat-val { font-size: 20px; }
+    .h2h-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <div class="app-header">
-  <h1><span>🏓</span> Pickleball Tournament</h1>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showScreen('setup')">Setup</button>
-    <button class="nav-tab" onclick="showScreen('bracket')">Bracket</button>
-    <button class="nav-tab" onclick="showScreen('stats')">Stats</button>
+  <h1><span>&#127955;</span> Pickleball Tournament</h1>
+  <div class="header-right">
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showScreen('setup')">Setup</button>
+      <button class="nav-tab" onclick="showScreen('bracket')">Bracket</button>
+      <button class="nav-tab" onclick="showScreen('stats')">Stats</button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Toggle theme">&#9790;</button>
   </div>
 </div>
 
-<!-- ═══ SETUP SCREEN ═══ -->
+<!-- SETUP SCREEN -->
 <div id="screen-setup" class="screen active">
   <div class="setup-container">
     <div class="setup-section">
@@ -601,6 +686,14 @@
       <button class="add-player-btn" onclick="addPlayerInput()">+ Add Player</button>
     </div>
 
+    <div class="setup-section">
+      <h2>Options</h2>
+      <label class="setup-checkbox">
+        <input type="checkbox" id="opt-consolation" checked onchange="saveData('pb_opt_consolation', this.checked)">
+        Enable consolation bracket (first-round losers)
+      </label>
+    </div>
+
     <div class="setup-section" style="background:transparent;border:none;padding:0;">
       <button class="start-btn" onclick="startTournament()" id="start-btn">
         Randomize &amp; Start Tournament
@@ -610,52 +703,67 @@
   </div>
 </div>
 
-<!-- ═══ BRACKET SCREEN ═══ -->
+<!-- BRACKET SCREEN -->
 <div id="screen-bracket" class="screen">
-  <div class="bracket-header">
-    <h2 id="bracket-title">Tournament Bracket</h2>
-    <div class="week-info" id="bracket-week-info"></div>
+  <div class="bracket-empty" id="bracket-empty">
+    <div class="icon">&#127955;</div>
+    <p>No tournament running yet.<br>Add some players and start one.</p>
+    <button onclick="showScreen('setup')">Start a Tournament</button>
   </div>
-  <div class="bracket-wrapper">
-    <div class="bracket-labels" id="bracket-labels"></div>
-    <div class="bracket-grid" id="bracket-container"></div>
-  </div>
-  <div class="champion-display hidden" id="champion-display">
-    <div class="champion-trophy">🏆</div>
-    <div class="champion-label">Champion</div>
-    <div class="champion-name" id="champion-name"></div>
-    <button class="new-tournament-btn" onclick="showScreen('setup')">New Tournament</button>
+  <div id="bracket-content" style="display:none;">
+    <div class="bracket-header">
+      <h2 id="bracket-title">Tournament Bracket</h2>
+      <div class="week-info" id="bracket-week-info"></div>
+      <div class="bracket-actions">
+        <button class="bracket-action-btn" onclick="shareResults()">&#128228; Share Results</button>
+      </div>
+    </div>
+    <div class="bracket-wrapper">
+      <div class="bracket-labels" id="bracket-labels"></div>
+      <div class="bracket-grid" id="bracket-container"></div>
+    </div>
+    <div id="consolation-area"></div>
+    <div class="champion-display hidden" id="champion-display">
+      <div class="champion-trophy">&#127942;</div>
+      <div class="champion-label">Champion</div>
+      <div class="champion-name" id="champion-name"></div>
+      <button class="new-tournament-btn" onclick="showScreen('setup')">New Tournament</button>
+    </div>
   </div>
 </div>
 
-<!-- ═══ STATS SCREEN ═══ -->
+<!-- STATS SCREEN -->
 <div id="screen-stats" class="screen">
   <div class="stats-container">
     <div class="stats-toggle">
-      <button class="stats-toggle-btn active" onclick="showStatsView('lifetime')">Lifetime Leaderboard</button>
-      <button class="stats-toggle-btn" onclick="showStatsView('weekly')">Weekly History</button>
+      <button class="stats-toggle-btn active" onclick="showStatsView('lifetime')">Leaderboard</button>
+      <button class="stats-toggle-btn" onclick="showStatsView('h2h')">Head-to-Head</button>
+      <button class="stats-toggle-btn" onclick="showStatsView('weekly')">History</button>
     </div>
     <div id="stats-lifetime" class="stats-view active"></div>
+    <div id="stats-h2h" class="stats-view"></div>
     <div id="stats-weekly" class="stats-view"></div>
     <div class="reset-section">
-      <button class="reset-btn" onclick="resetWeeklyStats()">Reset Weekly Stats</button>
+      <button class="reset-btn" onclick="resetWeeklyStats()">Clear Tournament History</button>
       <button class="reset-btn" onclick="resetAllStats()">Reset All Stats</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ CHAMPION CELEBRATION ═══ -->
+<!-- CHAMPION CELEBRATION -->
 <div class="champion-celebration" id="champion-celebration" onclick="closeChampionCelebration()">
-  <div class="champ-trophy-big">🏆</div>
+  <div class="champ-trophy-big">&#127942;</div>
   <div class="champ-celeb-label">Champion</div>
   <div class="champ-celeb-name" id="champ-celeb-name"></div>
   <button class="champ-celeb-btn" onclick="event.stopPropagation(); closeChampionCelebration()">Continue</button>
 </div>
 
-<!-- ═══ WINNER MODAL ═══ -->
+<!-- WINNER MODAL -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
-    <h3>Select Winner</h3>
+    <h3>Record Match Result</h3>
+    <div id="modal-score-entry"></div>
+    <div class="score-divider">or quick-pick winner</div>
     <div class="modal-match" id="modal-match"></div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeModal()">Cancel</button>
@@ -664,11 +772,13 @@
   </div>
 </div>
 
-<!-- ═══ UNDO BAR ═══ -->
-<div class="undo-bar" id="undo-bar">
-  <span id="undo-text"></span>
-  <button class="undo-btn" onclick="undoLastResult()">Undo</button>
+<!-- PLAYER PROFILE MODAL -->
+<div class="profile-modal-overlay" id="profile-overlay" onclick="if(event.target===this)closeProfile()">
+  <div class="profile-modal" id="profile-modal"></div>
 </div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
 
 <script>
 // ─── STATE ───
@@ -677,6 +787,26 @@ let tournament = null;
 let selectedWinner = null;
 let currentMatchInfo = null;
 let undoStack = [];
+let justAdvancedSlots = new Set();
+
+function saveTournamentState() {
+  if (tournament) {
+    saveData('pb_tournament', { tournament, undoStack });
+  } else {
+    localStorage.removeItem('pb_tournament');
+  }
+}
+function loadTournamentState() {
+  const saved = loadData('pb_tournament', null);
+  if (saved && saved.tournament) {
+    tournament = saved.tournament;
+    undoStack = Array.isArray(saved.undoStack) ? saved.undoStack : [];
+    // Prime _lastChampion so a rehydrated finished tournament doesn't re-fire celebration.
+    const totalRounds = tournament.rounds.length;
+    const finalWinner = tournament.rounds[totalRounds - 1][0].winner;
+    if (finalWinner) _lastChampion = finalWinner;
+  }
+}
 
 // ─── PERSISTENCE ───
 function loadData(key, fallback) {
@@ -687,6 +817,66 @@ function saveData(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
 let lifetimeStats = loadData('pb_lifetime', {});
 let weeklyHistory = loadData('pb_weekly', []);
+
+function ensurePlayerStats(name) {
+  if (!lifetimeStats[name]) {
+    lifetimeStats[name] = { wins: 0, losses: 0, championships: 0, currentStreak: 0, longestWinStreak: 0, h2h: {} };
+  }
+  // Migrate old entries
+  if (lifetimeStats[name].currentStreak === undefined) lifetimeStats[name].currentStreak = 0;
+  if (lifetimeStats[name].longestWinStreak === undefined) lifetimeStats[name].longestWinStreak = 0;
+  if (!lifetimeStats[name].h2h) lifetimeStats[name].h2h = {};
+}
+
+// ─── THEME ───
+function initTheme() {
+  const saved = localStorage.getItem('pb_theme');
+  const theme = saved || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  updateThemeIcon(theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('pb_theme', next);
+  updateThemeIcon(next);
+}
+function updateThemeIcon(theme) {
+  document.getElementById('theme-btn').innerHTML = theme === 'dark' ? '&#9788;' : '&#9790;';
+}
+initTheme();
+
+// ─── TOAST SYSTEM ───
+function showToast(text, actionLabel, actionFn, duration) {
+  duration = duration || 5000;
+  const container = document.getElementById('toast-container');
+  // If this toast has an action, dismiss any prior actionable toasts so their
+  // (now-stale) buttons don't trigger an action that no longer matches the text.
+  if (actionLabel && actionFn) {
+    container.querySelectorAll('.toast.has-action').forEach(removeToast);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  const span = document.createElement('span');
+  span.textContent = text;
+  toast.appendChild(span);
+  if (actionLabel && actionFn) {
+    toast.classList.add('has-action');
+    const btn = document.createElement('button');
+    btn.className = 'toast-action';
+    btn.textContent = actionLabel;
+    btn.addEventListener('click', () => { actionFn(); removeToast(toast); });
+    toast.appendChild(btn);
+  }
+  container.appendChild(toast);
+  setTimeout(() => removeToast(toast), duration);
+}
+function removeToast(toast) {
+  if (!toast.parentNode) return;
+  toast.classList.add('leaving');
+  setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+}
 
 // ─── SETUP ───
 function setFormat(f) {
@@ -703,17 +893,44 @@ function initPlayerInputs() {
   const saved = loadData('pb_players', []);
   const names = saved.length >= 4 ? saved : ['', '', '', ''];
   names.forEach((n, i) => createPlayerRow(container, i + 1, n));
+  updateRemoveButtonsState();
 }
 
 function createPlayerRow(container, num, value) {
   const div = document.createElement('div');
   div.className = 'player-input-row';
-  div.innerHTML = `
-    <div class="player-num">${num}</div>
-    <input type="text" placeholder="Player ${num}" value="${value || ''}" oninput="validateSetup()" onkeydown="if(event.key==='Enter'){addPlayerInput();}">
-    <button class="remove-player-btn" onclick="removePlayer(this)" title="Remove">&times;</button>
-  `;
+  const numDiv = document.createElement('div');
+  numDiv.className = 'player-num';
+  numDiv.textContent = num;
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Player ' + num;
+  input.value = value || '';
+  input.addEventListener('input', () => { savePlayerNamesDraft(); validateSetup(); });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') addPlayerInput(); });
+  const removeBtn = document.createElement('button');
+  removeBtn.className = 'remove-player-btn';
+  removeBtn.title = 'Remove';
+  removeBtn.innerHTML = '&times;';
+  removeBtn.addEventListener('click', () => removePlayer(removeBtn));
+  div.appendChild(numDiv);
+  div.appendChild(input);
+  div.appendChild(removeBtn);
   container.appendChild(div);
+}
+
+function savePlayerNamesDraft() {
+  const names = Array.from(document.querySelectorAll('#player-list input')).map(i => i.value);
+  saveData('pb_players', names);
+}
+
+function updateRemoveButtonsState() {
+  const rows = document.querySelectorAll('#player-list .player-input-row');
+  const disabled = rows.length <= 4;
+  rows.forEach(row => {
+    const btn = row.querySelector('.remove-player-btn');
+    if (btn) btn.disabled = disabled;
+  });
 }
 
 function addPlayerInput() {
@@ -723,6 +940,8 @@ function addPlayerInput() {
   const inputs = container.querySelectorAll('input');
   inputs[inputs.length - 1].focus();
   renumberPlayers();
+  updateRemoveButtonsState();
+  savePlayerNamesDraft();
   validateSetup();
 }
 
@@ -731,19 +950,21 @@ function removePlayer(btn) {
   if (container.children.length <= 4) return;
   btn.closest('.player-input-row').remove();
   renumberPlayers();
+  updateRemoveButtonsState();
+  savePlayerNamesDraft();
   validateSetup();
 }
 
 function renumberPlayers() {
   document.querySelectorAll('#player-list .player-input-row').forEach((row, i) => {
     row.querySelector('.player-num').textContent = i + 1;
+    row.querySelector('input').placeholder = 'Player ' + (i + 1);
   });
 }
 
 function getPlayerNames() {
   return Array.from(document.querySelectorAll('#player-list input'))
-    .map(i => i.value.trim())
-    .filter(n => n.length > 0);
+    .map(i => i.value.trim()).filter(n => n.length > 0);
 }
 
 function validateSetup() {
@@ -756,23 +977,18 @@ function validateSetup() {
   if (names.length < minPlayers) {
     btn.disabled = true;
     err.style.display = names.length > 0 ? 'block' : 'none';
-    err.textContent = `Need at least ${minPlayers} players`;
+    err.textContent = 'Need at least ' + minPlayers + ' players';
     return;
   }
   if (uniqueNames.size !== names.length) {
-    btn.disabled = true;
-    err.style.display = 'block';
-    err.textContent = 'Player names must be unique';
-    return;
+    btn.disabled = true; err.style.display = 'block';
+    err.textContent = 'Player names must be unique'; return;
   }
   if (format === 'doubles' && names.length % 2 !== 0) {
-    btn.disabled = true;
-    err.style.display = 'block';
-    err.textContent = 'Doubles requires an even number of players';
-    return;
+    btn.disabled = true; err.style.display = 'block';
+    err.textContent = 'Doubles requires an even number of players'; return;
   }
-  btn.disabled = false;
-  err.style.display = 'none';
+  btn.disabled = false; err.style.display = 'none';
 }
 
 // ─── TOURNAMENT LOGIC ───
@@ -785,18 +1001,14 @@ function shuffle(arr) {
   return a;
 }
 
-function nextPowerOf2(n) {
-  let p = 1;
-  while (p < n) p *= 2;
-  return p;
-}
+function nextPowerOf2(n) { let p = 1; while (p < n) p *= 2; return p; }
 
 function getRoundName(roundIdx, totalRounds) {
   const fromFinal = totalRounds - 1 - roundIdx;
   if (fromFinal === 0) return 'Final';
   if (fromFinal === 1) return 'Semifinals';
   if (fromFinal === 2) return 'Quarterfinals';
-  return `Round of ${Math.pow(2, fromFinal + 1)}`;
+  return 'Round of ' + Math.pow(2, fromFinal + 1);
 }
 
 function startTournament() {
@@ -819,7 +1031,6 @@ function startTournament() {
   const totalRounds = Math.log2(bracketSize);
   const byeCount = bracketSize - n;
 
-  // Distribute byes evenly across bracket positions
   const slots = new Array(bracketSize).fill(null);
   if (byeCount > 0) {
     const step = bracketSize / byeCount;
@@ -829,23 +1040,16 @@ function startTournament() {
     }
     let pi = 0;
     for (let i = 0; i < bracketSize; i++) {
-      if (byePositions.has(i)) {
-        slots[i] = null;
-      } else {
-        slots[i] = participants[pi++];
-      }
+      slots[i] = byePositions.has(i) ? null : participants[pi++];
     }
   } else {
-    for (let i = 0; i < n; i++) {
-      slots[i] = participants[i];
-    }
+    for (let i = 0; i < n; i++) slots[i] = participants[i];
   }
 
-  // Build rounds
   const rounds = [];
   const firstRound = [];
   for (let i = 0; i < bracketSize; i += 2) {
-    const m = { player1: slots[i], player2: slots[i + 1], winner: null, isBye: false };
+    const m = { player1: slots[i], player2: slots[i + 1], winner: null, isBye: false, score1: null, score2: null };
     if (m.player1 === null && m.player2 === null) {
       m.isBye = true;
     } else if (m.player1 === null) {
@@ -861,7 +1065,7 @@ function startTournament() {
     const prevLen = rounds[r - 1].length;
     const thisRound = [];
     for (let i = 0; i < prevLen; i += 2) {
-      thisRound.push({ player1: null, player2: null, winner: null, isBye: false });
+      thisRound.push({ player1: null, player2: null, winner: null, isBye: false, score1: null, score2: null });
     }
     rounds.push(thisRound);
   }
@@ -869,14 +1073,19 @@ function startTournament() {
   propagateByes(rounds);
 
   const weekNum = weeklyHistory.length + 1;
+  const enableConsolation = document.getElementById('opt-consolation').checked;
   tournament = {
     rounds, participants, format,
     week: weekNum,
     date: new Date().toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
-    results: []
+    results: [],
+    consolationEnabled: enableConsolation,
+    consolation: null
   };
 
   undoStack = [];
+  justAdvancedSlots.clear();
+  saveTournamentState();
   renderBracket();
   showScreen('bracket');
 }
@@ -894,48 +1103,37 @@ function propagateByes(rounds) {
 
       if (nextMatch.player1 && !nextMatch.player2 &&
           match2 && match2.isBye && !match2.player1 && !match2.player2) {
-        nextMatch.winner = nextMatch.player1;
-        nextMatch.isBye = true;
+        nextMatch.winner = nextMatch.player1; nextMatch.isBye = true;
       } else if (nextMatch.player2 && !nextMatch.player1 &&
                  match1 && match1.isBye && !match1.player1 && !match1.player2) {
-        nextMatch.winner = nextMatch.player2;
-        nextMatch.isBye = true;
+        nextMatch.winner = nextMatch.player2; nextMatch.isBye = true;
       }
     }
   }
 }
 
 // ─── BRACKET RENDERING (CSS GRID — SPLIT LEFT/RIGHT) ───
-function renderBracket() {
-  if (!tournament) return;
-  const { rounds } = tournament;
+function renderBracketGrid(rounds, containerId, labelsId) {
   const totalRounds = rounds.length;
   const numSideRounds = totalRounds - 1;
+  const isConsolation = containerId !== 'bracket-container';
 
-  // Update header
-  document.getElementById('bracket-title').innerHTML =
-    `Week ${tournament.week} Tournament <span class="format-badge">${tournament.format}</span>`;
-  document.getElementById('bracket-week-info').textContent = tournament.date;
-
-  const container = document.getElementById('bracket-container');
-  const labelsEl = document.getElementById('bracket-labels');
+  const container = document.getElementById(containerId);
+  const labelsEl = labelsId ? document.getElementById(labelsId) : null;
   container.innerHTML = '';
-  labelsEl.innerHTML = '';
+  if (labelsEl) labelsEl.innerHTML = '';
 
-  // ── Special case: only 2 participants (single final) ──
   if (totalRounds === 1) {
-    labelsEl.style.display = 'none';
+    if (labelsEl) labelsEl.style.display = 'none';
     container.style.display = 'flex';
     container.style.justifyContent = 'center';
-    container.style.paddingTop = '40px';
+    container.style.paddingTop = '20px';
     container.style.removeProperty('grid-template-columns');
     container.style.removeProperty('grid-template-rows');
-    container.appendChild(createMatchupElement(rounds[0][0], 0, 0));
-    checkChampion();
+    container.appendChild(createMatchupElement(rounds[0][0], 0, 0, isConsolation));
     return;
   }
 
-  // ── Grid setup ──
   const matchesPerSide = rounds[0].length / 2;
   const gridRows = matchesPerSide * 2;
   const isMobile = window.innerWidth <= 600;
@@ -943,87 +1141,73 @@ function renderBracket() {
   const rowHeight = isMobile
     ? Math.max(40, Math.min(70, 420 / gridRows))
     : Math.max(50, Math.min(90, 500 / gridRows));
-  const totalCols = 4 * numSideRounds + 1;
 
   const roundColW = isTiny ? 'minmax(68px, 1fr)' : isMobile ? 'minmax(82px, 1fr)' : 'minmax(150px, 1fr)';
   const finalColW = isTiny ? 'minmax(76px, 1fr)' : isMobile ? 'minmax(92px, 1fr)' : 'minmax(160px, 1fr)';
   const connW = isMobile ? '18px' : '36px';
 
-  // Column widths: [round, conn, round, conn, ...] FINAL [..., conn, round, conn, round]
   const colWidths = [];
-  for (let i = 0; i < numSideRounds; i++) {
-    colWidths.push(roundColW); // round
-    colWidths.push(connW); // connector
-  }
-  colWidths.push(finalColW); // final
-  for (let i = 0; i < numSideRounds; i++) {
-    colWidths.push(connW); // connector
-    colWidths.push(roundColW); // round
-  }
+  for (let i = 0; i < numSideRounds; i++) { colWidths.push(roundColW); colWidths.push(connW); }
+  colWidths.push(finalColW);
+  for (let i = 0; i < numSideRounds; i++) { colWidths.push(connW); colWidths.push(roundColW); }
   const colTemplate = colWidths.join(' ');
 
-  // ── Labels row ──
-  labelsEl.style.display = 'grid';
-  labelsEl.style.gridTemplateColumns = colTemplate;
-
-  for (let sr = 0; sr < numSideRounds; sr++) {
-    const label = document.createElement('div');
-    label.className = 'round-label';
-    label.textContent = getRoundName(sr, totalRounds);
-    label.style.gridColumn = `${2 * sr + 1}`;
-    labelsEl.appendChild(label);
-  }
-  // Final label
-  const finalLabel = document.createElement('div');
-  finalLabel.className = 'round-label';
-  finalLabel.textContent = 'Final';
-  finalLabel.style.gridColumn = `${2 * numSideRounds + 1}`;
-  labelsEl.appendChild(finalLabel);
-  // Right side labels (mirrored)
-  for (let sr = numSideRounds - 1; sr >= 0; sr--) {
-    const label = document.createElement('div');
-    label.className = 'round-label';
-    label.textContent = getRoundName(sr, totalRounds);
-    label.style.gridColumn = `${2 * numSideRounds + 1 + 2 * (numSideRounds - sr)}`;
-    labelsEl.appendChild(label);
+  if (labelsEl) {
+    labelsEl.style.display = 'grid';
+    labelsEl.style.gridTemplateColumns = colTemplate;
+    for (let sr = 0; sr < numSideRounds; sr++) {
+      const label = document.createElement('div');
+      label.className = 'round-label';
+      label.textContent = getRoundName(sr, totalRounds);
+      label.style.gridColumn = '' + (2 * sr + 1);
+      labelsEl.appendChild(label);
+    }
+    const finalLabel = document.createElement('div');
+    finalLabel.className = 'round-label';
+    finalLabel.textContent = 'Final';
+    finalLabel.style.gridColumn = '' + (2 * numSideRounds + 1);
+    labelsEl.appendChild(finalLabel);
+    for (let sr = numSideRounds - 1; sr >= 0; sr--) {
+      const label = document.createElement('div');
+      label.className = 'round-label';
+      label.textContent = getRoundName(sr, totalRounds);
+      label.style.gridColumn = '' + (2 * numSideRounds + 1 + 2 * (numSideRounds - sr));
+      labelsEl.appendChild(label);
+    }
   }
 
-  // ── Bracket grid ──
   container.style.display = 'grid';
   container.style.gridTemplateColumns = colTemplate;
-  container.style.gridTemplateRows = `repeat(${gridRows}, ${rowHeight}px)`;
+  container.style.gridTemplateRows = 'repeat(' + gridRows + ', ' + rowHeight + 'px)';
   container.style.gap = '0';
   container.style.alignItems = 'stretch';
 
-  // ── Place LEFT side matchups ──
+  // LEFT matchups
   for (let sr = 0; sr < numSideRounds; sr++) {
     const allMatches = rounds[sr];
     const halfLen = allMatches.length / 2;
     const sideMatches = allMatches.slice(0, halfLen);
-    const gridCol = 2 * sr + 1; // 1-indexed
+    const gridCol = 2 * sr + 1;
     const span = Math.pow(2, sr + 1);
-
     sideMatches.forEach((match, mIdx) => {
-      const el = createMatchupElement(match, sr, mIdx);
-      el.style.gridColumn = `${gridCol}`;
-      el.style.gridRow = `${mIdx * span + 1} / span ${span}`;
+      const el = createMatchupElement(match, sr, mIdx, isConsolation);
+      el.style.gridColumn = '' + gridCol;
+      el.style.gridRow = (mIdx * span + 1) + ' / span ' + span;
       el.style.alignSelf = 'center';
       container.appendChild(el);
     });
   }
 
-  // ── Place LEFT side connectors ──
+  // LEFT connectors
   for (let sr = 0; sr < numSideRounds; sr++) {
     const sideMatchCount = rounds[sr].length / 2;
     const connCol = 2 * sr + 2;
     const span = Math.pow(2, sr + 1);
-
     if (sideMatchCount <= 1) {
-      // Horizontal line
       const conn = document.createElement('div');
       conn.className = 'bracket-conn bracket-conn-line';
-      conn.style.gridColumn = `${connCol}`;
-      conn.style.gridRow = `1 / span ${gridRows}`;
+      conn.style.gridColumn = '' + connCol;
+      conn.style.gridRow = '1 / span ' + gridRows;
       container.appendChild(conn);
     } else {
       const numPairs = sideMatchCount / 2;
@@ -1031,50 +1215,48 @@ function renderBracket() {
       for (let p = 0; p < numPairs; p++) {
         const conn = document.createElement('div');
         conn.className = 'bracket-conn bracket-conn-left';
-        conn.style.gridColumn = `${connCol}`;
-        conn.style.gridRow = `${p * pairSpan + 1} / span ${pairSpan}`;
+        conn.style.gridColumn = '' + connCol;
+        conn.style.gridRow = (p * pairSpan + 1) + ' / span ' + pairSpan;
         container.appendChild(conn);
       }
     }
   }
 
-  // ── Place FINAL ──
+  // FINAL
   const finalCol = 2 * numSideRounds + 1;
-  const finalEl = createMatchupElement(rounds[totalRounds - 1][0], totalRounds - 1, 0);
-  finalEl.style.gridColumn = `${finalCol}`;
-  finalEl.style.gridRow = `1 / span ${gridRows}`;
+  const finalEl = createMatchupElement(rounds[totalRounds - 1][0], totalRounds - 1, 0, isConsolation);
+  finalEl.style.gridColumn = '' + finalCol;
+  finalEl.style.gridRow = '1 / span ' + gridRows;
   finalEl.style.alignSelf = 'center';
   container.appendChild(finalEl);
 
-  // ── Place RIGHT side matchups ──
+  // RIGHT matchups
   for (let sr = 0; sr < numSideRounds; sr++) {
     const allMatches = rounds[sr];
     const halfLen = allMatches.length / 2;
     const sideMatches = allMatches.slice(halfLen);
     const gridCol = 2 * numSideRounds + 1 + 2 * (numSideRounds - sr);
     const span = Math.pow(2, sr + 1);
-
     sideMatches.forEach((match, mIdx) => {
       const actualMatchIdx = mIdx + halfLen;
-      const el = createMatchupElement(match, sr, actualMatchIdx);
-      el.style.gridColumn = `${gridCol}`;
-      el.style.gridRow = `${mIdx * span + 1} / span ${span}`;
+      const el = createMatchupElement(match, sr, actualMatchIdx, isConsolation);
+      el.style.gridColumn = '' + gridCol;
+      el.style.gridRow = (mIdx * span + 1) + ' / span ' + span;
       el.style.alignSelf = 'center';
       container.appendChild(el);
     });
   }
 
-  // ── Place RIGHT side connectors ──
+  // RIGHT connectors
   for (let sr = 0; sr < numSideRounds; sr++) {
     const sideMatchCount = rounds[sr].length / 2;
     const connCol = 2 * numSideRounds + 2 * (numSideRounds - sr);
     const span = Math.pow(2, sr + 1);
-
     if (sideMatchCount <= 1) {
       const conn = document.createElement('div');
       conn.className = 'bracket-conn bracket-conn-line';
-      conn.style.gridColumn = `${connCol}`;
-      conn.style.gridRow = `1 / span ${gridRows}`;
+      conn.style.gridColumn = '' + connCol;
+      conn.style.gridRow = '1 / span ' + gridRows;
       container.appendChild(conn);
     } else {
       const numPairs = sideMatchCount / 2;
@@ -1082,27 +1264,58 @@ function renderBracket() {
       for (let p = 0; p < numPairs; p++) {
         const conn = document.createElement('div');
         conn.className = 'bracket-conn bracket-conn-right';
-        conn.style.gridColumn = `${connCol}`;
-        conn.style.gridRow = `${p * pairSpan + 1} / span ${pairSpan}`;
+        conn.style.gridColumn = '' + connCol;
+        conn.style.gridRow = (p * pairSpan + 1) + ' / span ' + pairSpan;
         container.appendChild(conn);
       }
     }
   }
-
-  checkChampion();
 }
 
-function createMatchupElement(match, roundIdx, matchIdx) {
+function renderBracket() {
+  if (!tournament) return;
+  document.getElementById('bracket-title').innerHTML =
+    'Week ' + tournament.week + ' Tournament <span class="format-badge">' + tournament.format + '</span>';
+  document.getElementById('bracket-week-info').textContent = tournament.date;
+
+  renderBracketGrid(tournament.rounds, 'bracket-container', 'bracket-labels');
+
+  // Consolation
+  const consolArea = document.getElementById('consolation-area');
+  consolArea.innerHTML = '';
+  if (tournament.consolation) {
+    const section = document.createElement('div');
+    section.className = 'consolation-section';
+    section.innerHTML = '<h3>Consolation Bracket</h3><p class="consolation-subtitle">First-round losers battle it out</p>';
+    const cLabels = document.createElement('div');
+    cLabels.className = 'bracket-labels';
+    cLabels.id = 'consolation-labels';
+    const cGrid = document.createElement('div');
+    cGrid.className = 'bracket-grid';
+    cGrid.id = 'consolation-container';
+    section.appendChild(cLabels);
+    section.appendChild(cGrid);
+    consolArea.appendChild(section);
+    renderBracketGrid(tournament.consolation.rounds, 'consolation-container', 'consolation-labels');
+  }
+
+  checkChampion();
+  // Clear animation markers after render
+  setTimeout(() => { justAdvancedSlots.clear(); }, 500);
+}
+
+function createMatchupElement(match, roundIdx, matchIdx, isConsolation) {
   const matchup = document.createElement('div');
   matchup.className = 'matchup';
-  matchup.appendChild(createSlot(match.player1, match, 1, roundIdx, matchIdx));
-  matchup.appendChild(createSlot(match.player2, match, 2, roundIdx, matchIdx));
+  matchup.appendChild(createSlot(match.player1, match, 1, roundIdx, matchIdx, isConsolation));
+  matchup.appendChild(createSlot(match.player2, match, 2, roundIdx, matchIdx, isConsolation));
   return matchup;
 }
 
-function createSlot(playerName, match, slotNum, roundIdx, matchIdx) {
+function createSlot(playerName, match, slotNum, roundIdx, matchIdx, isConsolation) {
   const slot = document.createElement('div');
   slot.className = 'match-slot';
+  const advKey = (isConsolation ? 'c' : 'm') + roundIdx + '-' + matchIdx + '-' + slotNum;
 
   if (!playerName) {
     slot.classList.add('empty');
@@ -1110,7 +1323,6 @@ function createSlot(playerName, match, slotNum, roundIdx, matchIdx) {
     span.className = 'player-name';
     span.textContent = 'TBD';
     slot.appendChild(span);
-
     if (!match.player1 && !match.player2 && match.isBye) {
       slot.classList.remove('empty');
       slot.classList.add('bye');
@@ -1118,6 +1330,8 @@ function createSlot(playerName, match, slotNum, roundIdx, matchIdx) {
     }
     return slot;
   }
+
+  if (justAdvancedSlots.has(advKey)) slot.classList.add('just-advanced');
 
   const nameSpan = document.createElement('span');
   nameSpan.className = 'player-name';
@@ -1128,16 +1342,77 @@ function createSlot(playerName, match, slotNum, roundIdx, matchIdx) {
     slot.classList.add('winner');
     const badge = document.createElement('span');
     badge.className = 'score-badge';
-    badge.textContent = 'W';
+    const scoreText = (slotNum === 1 && match.score1 !== null && match.score2 !== null)
+      ? match.score1 + '-' + match.score2
+      : (slotNum === 2 && match.score1 !== null && match.score2 !== null)
+        ? match.score2 + '-' + match.score1
+        : 'W';
+    badge.textContent = scoreText;
     slot.appendChild(badge);
   } else if (match.winner && match.winner !== playerName) {
     slot.classList.add('loser');
   } else if (match.player1 && match.player2 && !match.winner && !match.isBye) {
     slot.classList.add('clickable');
-    slot.addEventListener('click', () => openModal(roundIdx, matchIdx));
+    slot.addEventListener('click', () => openModal(roundIdx, matchIdx, isConsolation));
   }
 
   return slot;
+}
+
+// ─── CONSOLATION BRACKET ───
+function checkAndBuildConsolation() {
+  if (!tournament || !tournament.consolationEnabled || tournament.consolation) return;
+  if (tournament.rounds.length < 2) return;
+
+  const firstRound = tournament.rounds[0];
+  const allFirstDone = firstRound.every(m => m.winner || m.isBye);
+  if (!allFirstDone) return;
+
+  const losers = [];
+  firstRound.forEach(m => {
+    if (m.isBye) return;
+    if (m.winner && m.player1 && m.player2) {
+      losers.push(m.winner === m.player1 ? m.player2 : m.player1);
+    }
+  });
+
+  if (losers.length < 2) return;
+
+  const n = losers.length;
+  const bracketSize = nextPowerOf2(n);
+  const totalRounds = Math.log2(bracketSize);
+  const byeCount = bracketSize - n;
+
+  const slots = new Array(bracketSize).fill(null);
+  if (byeCount > 0) {
+    const step = bracketSize / byeCount;
+    const byePositions = new Set();
+    for (let i = 0; i < byeCount; i++) byePositions.add(Math.round((i + 1) * step) - 1);
+    let pi = 0;
+    for (let i = 0; i < bracketSize; i++) slots[i] = byePositions.has(i) ? null : losers[pi++];
+  } else {
+    for (let i = 0; i < n; i++) slots[i] = losers[i];
+  }
+
+  const rounds = [];
+  const firstCRound = [];
+  for (let i = 0; i < bracketSize; i += 2) {
+    const m = { player1: slots[i], player2: slots[i + 1], winner: null, isBye: false, score1: null, score2: null };
+    if (!m.player1 && !m.player2) { m.isBye = true; }
+    else if (!m.player1) { m.winner = m.player2; m.isBye = true; }
+    else if (!m.player2) { m.winner = m.player1; m.isBye = true; }
+    firstCRound.push(m);
+  }
+  rounds.push(firstCRound);
+  for (let r = 1; r < totalRounds; r++) {
+    const thisRound = [];
+    for (let i = 0; i < rounds[r - 1].length; i += 2) {
+      thisRound.push({ player1: null, player2: null, winner: null, isBye: false, score1: null, score2: null });
+    }
+    rounds.push(thisRound);
+  }
+  propagateByes(rounds);
+  tournament.consolation = { rounds, participants: losers };
 }
 
 let _lastChampion = null;
@@ -1169,8 +1444,12 @@ function showChampionCelebration(name) {
 
 function closeChampionCelebration() {
   const overlay = document.getElementById('champion-celebration');
-  overlay.classList.remove('show');
-  overlay.querySelectorAll('.champ-confetti').forEach(c => c.remove());
+  if (!overlay.classList.contains('show') || overlay.classList.contains('leaving')) return;
+  overlay.classList.add('leaving');
+  setTimeout(() => {
+    overlay.classList.remove('show', 'leaving');
+    overlay.querySelectorAll('.champ-confetti').forEach(c => c.remove());
+  }, 400);
 }
 
 function spawnConfetti(parent) {
@@ -1186,17 +1465,37 @@ function spawnConfetti(parent) {
   }
 }
 
-// ─── MODAL ───
-function openModal(roundIdx, matchIdx) {
-  const match = tournament.rounds[roundIdx][matchIdx];
+// ─── MODAL (SCORE ENTRY + QUICK PICK) ───
+function openModal(roundIdx, matchIdx, isConsolation) {
+  const rounds = isConsolation ? tournament.consolation.rounds : tournament.rounds;
+  const match = rounds[roundIdx][matchIdx];
   if (match.winner || !match.player1 || !match.player2) return;
 
-  currentMatchInfo = { roundIdx, matchIdx };
+  currentMatchInfo = { roundIdx, matchIdx, isConsolation: !!isConsolation };
   selectedWinner = null;
 
+  // Score entry
+  const scoreArea = document.getElementById('modal-score-entry');
+  scoreArea.innerHTML = '';
+  const scoreDiv = document.createElement('div');
+  scoreDiv.className = 'score-entry';
+  scoreDiv.innerHTML = '<div class="score-side"><label></label><input type="number" inputmode="numeric" pattern="[0-9]*" class="score-input" id="score-p1" min="0" max="99" placeholder="0"></div>' +
+    '<div class="score-dash">–</div>' +
+    '<div class="score-side"><label></label><input type="number" inputmode="numeric" pattern="[0-9]*" class="score-input" id="score-p2" min="0" max="99" placeholder="0"></div>';
+  scoreDiv.querySelectorAll('label')[0].textContent = match.player1;
+  scoreDiv.querySelectorAll('label')[1].textContent = match.player2;
+  scoreArea.appendChild(scoreDiv);
+  const hint = document.createElement('div');
+  hint.className = 'score-hint';
+  hint.textContent = 'First to 11, win by 2';
+  scoreArea.appendChild(hint);
+
+  document.getElementById('score-p1').addEventListener('input', onScoreInput);
+  document.getElementById('score-p2').addEventListener('input', onScoreInput);
+
+  // Quick pick players
   const modalMatch = document.getElementById('modal-match');
   modalMatch.innerHTML = '';
-
   [match.player1, match.player2].forEach((name, i) => {
     if (i === 1) {
       const vs = document.createElement('div');
@@ -1210,6 +1509,9 @@ function openModal(roundIdx, matchIdx) {
     div.querySelector('.name').textContent = name;
     div.addEventListener('click', () => {
       selectedWinner = name;
+      // Clear score inputs when quick picking
+      document.getElementById('score-p1').value = '';
+      document.getElementById('score-p2').value = '';
       document.querySelectorAll('.modal-player').forEach(p => p.classList.remove('selected'));
       div.classList.add('selected');
       document.getElementById('modal-confirm').disabled = false;
@@ -1221,60 +1523,116 @@ function openModal(roundIdx, matchIdx) {
   document.getElementById('modal-overlay').classList.add('active');
 }
 
+function onScoreInput() {
+  const s1 = parseInt(document.getElementById('score-p1').value);
+  const s2 = parseInt(document.getElementById('score-p2').value);
+  if (isNaN(s1) || isNaN(s2) || s1 < 0 || s2 < 0) {
+    selectedWinner = null;
+    document.getElementById('modal-confirm').disabled = true;
+    document.querySelectorAll('.modal-player').forEach(p => p.classList.remove('selected'));
+    return;
+  }
+
+  const max = Math.max(s1, s2);
+  const min = Math.min(s1, s2);
+  const valid = max >= 11 && (max - min) >= 2 && s1 !== s2;
+
+  if (valid) {
+    const rounds = currentMatchInfo.isConsolation ? tournament.consolation.rounds : tournament.rounds;
+    const match = rounds[currentMatchInfo.roundIdx][currentMatchInfo.matchIdx];
+    selectedWinner = s1 > s2 ? match.player1 : match.player2;
+
+    // Highlight the winner in quick-pick
+    document.querySelectorAll('.modal-player').forEach((p, i) => {
+      const isWinner = (i === 0 && s1 > s2) || (i === 1 && s2 > s1);
+      p.classList.toggle('selected', isWinner);
+    });
+    document.getElementById('modal-confirm').disabled = false;
+  } else {
+    selectedWinner = null;
+    document.getElementById('modal-confirm').disabled = true;
+    document.querySelectorAll('.modal-player').forEach(p => p.classList.remove('selected'));
+  }
+}
+
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('active');
-  currentMatchInfo = null;
-  selectedWinner = null;
+  currentMatchInfo = null; selectedWinner = null;
 }
 
 function confirmWinner() {
   if (!selectedWinner || !currentMatchInfo) return;
 
-  const { roundIdx, matchIdx } = currentMatchInfo;
-  const match = tournament.rounds[roundIdx][matchIdx];
+  const { roundIdx, matchIdx, isConsolation } = currentMatchInfo;
+  const rounds = isConsolation ? tournament.consolation.rounds : tournament.rounds;
+  const match = rounds[roundIdx][matchIdx];
   const loser = match.player1 === selectedWinner ? match.player2 : match.player1;
 
-  undoStack.push(JSON.parse(JSON.stringify(tournament)));
+  undoStack.push({
+    tournament: JSON.parse(JSON.stringify(tournament)),
+    lifetimeStats: JSON.parse(JSON.stringify(lifetimeStats)),
+    weeklyHistory: JSON.parse(JSON.stringify(weeklyHistory))
+  });
 
   match.winner = selectedWinner;
-  tournament.results.push({ winner: selectedWinner, loser });
-
-  updatePlayerStat(selectedWinner, 'wins');
-  updatePlayerStat(loser, 'losses');
-
-  const totalRounds = tournament.rounds.length;
-  if (roundIdx < totalRounds - 1) {
-    const nextMatchIdx = Math.floor(matchIdx / 2);
-    const nextMatch = tournament.rounds[roundIdx + 1][nextMatchIdx];
-    if (matchIdx % 2 === 0) {
-      nextMatch.player1 = selectedWinner;
-    } else {
-      nextMatch.player2 = selectedWinner;
-    }
+  const s1 = parseInt(document.getElementById('score-p1').value);
+  const s2 = parseInt(document.getElementById('score-p2').value);
+  if (!isNaN(s1) && !isNaN(s2) && s1 >= 0 && s2 >= 0) {
+    match.score1 = s1; match.score2 = s2;
   }
 
-  if (roundIdx === totalRounds - 1) {
-    updatePlayerStat(selectedWinner, 'championships');
+  tournament.results.push({ winner: selectedWinner, loser, score1: match.score1, score2: match.score2, consolation: isConsolation });
+
+  // Update stats
+  ensurePlayerStats(selectedWinner);
+  ensurePlayerStats(loser);
+  lifetimeStats[selectedWinner].wins++;
+  lifetimeStats[loser].losses++;
+
+  // Streaks
+  lifetimeStats[selectedWinner].currentStreak++;
+  if (lifetimeStats[selectedWinner].currentStreak > lifetimeStats[selectedWinner].longestWinStreak) {
+    lifetimeStats[selectedWinner].longestWinStreak = lifetimeStats[selectedWinner].currentStreak;
+  }
+  lifetimeStats[loser].currentStreak = 0;
+
+  // H2H
+  if (!lifetimeStats[selectedWinner].h2h[loser]) lifetimeStats[selectedWinner].h2h[loser] = { w: 0, l: 0 };
+  if (!lifetimeStats[loser].h2h[selectedWinner]) lifetimeStats[loser].h2h[selectedWinner] = { w: 0, l: 0 };
+  lifetimeStats[selectedWinner].h2h[loser].w++;
+  lifetimeStats[loser].h2h[selectedWinner].l++;
+
+  const totalRounds = rounds.length;
+  if (roundIdx < totalRounds - 1) {
+    const nextMatchIdx = Math.floor(matchIdx / 2);
+    const nextMatch = rounds[roundIdx + 1][nextMatchIdx];
+    if (matchIdx % 2 === 0) { nextMatch.player1 = selectedWinner; }
+    else { nextMatch.player2 = selectedWinner; }
+    const slotNum = matchIdx % 2 === 0 ? 1 : 2;
+    const advKey = (isConsolation ? 'c' : 'm') + (roundIdx + 1) + '-' + nextMatchIdx + '-' + slotNum;
+    justAdvancedSlots.add(advKey);
+  }
+
+  if (!isConsolation && roundIdx === totalRounds - 1) {
+    ensurePlayerStats(selectedWinner);
+    lifetimeStats[selectedWinner].championships++;
     saveTournamentToHistory();
   }
 
+  // Build consolation after first round completes
+  if (!isConsolation) checkAndBuildConsolation();
+
   closeModal();
   renderBracket();
-  showUndo(`${selectedWinner} wins vs ${loser}`);
+  const scoreText = match.score1 !== null ? ' (' + match.score1 + '-' + match.score2 + ')' : '';
+  showToast(selectedWinner + ' wins' + scoreText, 'Undo', undoLastResult);
   saveStats();
-}
-
-function updatePlayerStat(name, stat) {
-  if (!lifetimeStats[name]) {
-    lifetimeStats[name] = { wins: 0, losses: 0, championships: 0 };
-  }
-  lifetimeStats[name][stat]++;
+  saveTournamentState();
 }
 
 function saveTournamentToHistory() {
   weeklyHistory.push({
-    week: tournament.week,
-    date: tournament.date,
+    week: tournament.week, date: tournament.date,
     format: tournament.format,
     champion: tournament.rounds[tournament.rounds.length - 1][0].winner,
     participants: tournament.participants,
@@ -1283,41 +1641,54 @@ function saveTournamentToHistory() {
   saveData('pb_weekly', weeklyHistory);
 }
 
-function saveStats() {
-  saveData('pb_lifetime', lifetimeStats);
-}
+function saveStats() { saveData('pb_lifetime', lifetimeStats); }
 
 // ─── UNDO ───
-function showUndo(text) {
-  document.getElementById('undo-text').textContent = text;
-  document.getElementById('undo-bar').classList.add('active');
-  clearTimeout(window._undoTimer);
-  window._undoTimer = setTimeout(() => {
-    document.getElementById('undo-bar').classList.remove('active');
-  }, 6000);
+function undoLastResult() {
+  const snapshot = undoStack.pop();
+  if (!snapshot) return;
+  tournament = snapshot.tournament;
+  lifetimeStats = snapshot.lifetimeStats;
+  weeklyHistory = snapshot.weeklyHistory;
+  saveData('pb_lifetime', lifetimeStats);
+  saveData('pb_weekly', weeklyHistory);
+  // Re-prime _lastChampion to the rehydrated final winner (if any),
+  // so undoing a non-final match doesn't re-fire the celebration.
+  const finalWinner = tournament.rounds[tournament.rounds.length - 1][0].winner;
+  _lastChampion = finalWinner || null;
+  saveTournamentState();
+  renderBracket();
 }
 
-function undoLastResult() {
-  if (undoStack.length === 0) return;
+// ─── SHARE RESULTS ───
+function shareResults() {
+  if (!tournament) return;
+  let text = 'Pickleball Tournament - Week ' + tournament.week + '\n';
+  text += tournament.date + ' | ' + tournament.format.charAt(0).toUpperCase() + tournament.format.slice(1) + '\n\n';
 
-  const lastResult = tournament.results[tournament.results.length - 1];
-  if (lastResult) {
-    const wasChampionship = tournament.rounds[tournament.rounds.length - 1][0].winner;
-    if (wasChampionship) {
-      lifetimeStats[wasChampionship].championships--;
-      if (weeklyHistory.length > 0 && weeklyHistory[weeklyHistory.length - 1].week === tournament.week) {
-        weeklyHistory.pop();
-        saveData('pb_weekly', weeklyHistory);
-      }
-    }
-    if (lifetimeStats[lastResult.winner]) lifetimeStats[lastResult.winner].wins--;
-    if (lifetimeStats[lastResult.loser]) lifetimeStats[lastResult.loser].losses--;
-    saveStats();
+  const champ = tournament.rounds[tournament.rounds.length - 1][0].winner;
+  if (champ) text += '🏆 Champion: ' + champ + '\n\n';
+
+  text += 'Results:\n';
+  tournament.results.filter(r => !r.consolation).forEach(r => {
+    const score = (r.score1 !== null && r.score2 !== null) ? ' (' + r.score1 + '-' + r.score2 + ')' : '';
+    text += '• ' + r.winner + ' def. ' + r.loser + score + '\n';
+  });
+
+  function copyFallback() {
+    if (!navigator.clipboard) { showToast('Sharing not supported on this device'); return; }
+    navigator.clipboard.writeText(text)
+      .then(() => showToast('Results copied to clipboard'))
+      .catch(() => showToast('Could not copy results'));
   }
-
-  tournament = undoStack.pop();
-  renderBracket();
-  document.getElementById('undo-bar').classList.remove('active');
+  if (navigator.share) {
+    navigator.share({ title: 'Pickleball Tournament Results', text }).catch((err) => {
+      if (err && err.name === 'AbortError') return; // user cancelled the share sheet
+      copyFallback();
+    });
+  } else {
+    copyFallback();
+  }
 }
 
 // ─── STATS RENDERING ───
@@ -1325,12 +1696,17 @@ function showStatsView(view) {
   document.querySelectorAll('.stats-toggle-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.stats-view').forEach(v => v.classList.remove('active'));
 
+  const btns = document.querySelectorAll('.stats-toggle-btn');
   if (view === 'lifetime') {
-    document.querySelector('.stats-toggle-btn:first-child').classList.add('active');
+    btns[0].classList.add('active');
     document.getElementById('stats-lifetime').classList.add('active');
     renderLifetimeStats();
+  } else if (view === 'h2h') {
+    btns[1].classList.add('active');
+    document.getElementById('stats-h2h').classList.add('active');
+    renderH2HView();
   } else {
-    document.querySelector('.stats-toggle-btn:last-child').classList.add('active');
+    btns[2].classList.add('active');
     document.getElementById('stats-weekly').classList.add('active');
     renderWeeklyHistory();
   }
@@ -1350,54 +1726,134 @@ function renderLifetimeStats() {
     if (b[1].wins !== a[1].wins) return b[1].wins - a[1].wins;
     const aTotal = a[1].wins + a[1].losses;
     const bTotal = b[1].wins + b[1].losses;
-    const aWinPct = aTotal > 0 ? a[1].wins / aTotal : 0;
-    const bWinPct = bTotal > 0 ? b[1].wins / bTotal : 0;
-    return bWinPct - aWinPct;
+    return (bTotal > 0 ? b[1].wins / bTotal : 0) - (aTotal > 0 ? a[1].wins / aTotal : 0);
   });
 
-  let html = `<table class="leaderboard-table">
-    <thead><tr><th>#</th><th>Player</th><th>W</th><th>L</th><th>Win %</th><th>🏆</th></tr></thead><tbody>`;
+  let html = '<table class="leaderboard-table"><thead><tr><th>#</th><th>Player</th><th>W</th><th>L</th><th>Win %</th><th>Streak</th><th>🏆</th></tr></thead><tbody>';
   entries.forEach(([name, stats], i) => {
+    ensurePlayerStats(name);
     const total = stats.wins + stats.losses;
     const pct = total > 0 ? Math.round((stats.wins / total) * 100) : 0;
-    html += `<tr>
-      <td class="rank">${i + 1}</td>
-      <td class="player-cell">${name}</td>
-      <td class="wins-cell">${stats.wins}</td>
-      <td class="losses-cell">${stats.losses}</td>
-      <td>${pct}%</td>
-      <td class="champ-cell">${stats.championships || '—'}</td>
-    </tr>`;
+    const streak = stats.currentStreak > 0 ? stats.currentStreak + 'W' : '—';
+    html += '<tr><td class="rank">' + (i + 1) + '</td><td class="player-cell" data-name="' + escAttr(name) + '">' + escHtml(name) + '</td><td class="wins-cell">' + stats.wins + '</td><td class="losses-cell">' + stats.losses + '</td><td>' + pct + '%</td><td class="streak-cell">' + streak + '</td><td class="champ-cell">' + (stats.championships || '—') + '</td></tr>';
   });
   html += '</tbody></table>';
   container.innerHTML = html;
+  container.querySelectorAll('[data-name]').forEach(el => {
+    el.addEventListener('click', () => openProfile(el.getAttribute('data-name')));
+  });
+}
+
+function renderH2HView() {
+  const container = document.getElementById('stats-h2h');
+  const players = Object.entries(lifetimeStats).filter(([_, s]) => s.wins > 0 || s.losses > 0);
+
+  if (players.length === 0) {
+    container.innerHTML = '<div class="empty-stats"><div class="icon">🤼</div><p>No head-to-head records yet.</p></div>';
+    return;
+  }
+
+  let html = '<div class="h2h-grid">';
+  players.sort((a, b) => a[0].localeCompare(b[0]));
+  players.forEach(([name, stats]) => {
+    ensurePlayerStats(name);
+    const h2hEntries = Object.entries(stats.h2h || {}).filter(([_, r]) => r.w > 0 || r.l > 0);
+    const totalW = h2hEntries.reduce((s, [_, r]) => s + r.w, 0);
+    const totalL = h2hEntries.reduce((s, [_, r]) => s + r.l, 0);
+    html += '<div class="h2h-card" data-name="' + escAttr(name) + '">' +
+      '<div class="h2h-card-name">' + escHtml(name) + '</div>' +
+      '<div class="h2h-card-record">' + totalW + 'W - ' + totalL + 'L | ' + h2hEntries.length + ' opponents</div></div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+  container.querySelectorAll('[data-name]').forEach(el => {
+    el.addEventListener('click', () => openProfile(el.getAttribute('data-name')));
+  });
 }
 
 function renderWeeklyHistory() {
   const container = document.getElementById('stats-weekly');
-
   if (weeklyHistory.length === 0) {
-    container.innerHTML = '<div class="empty-stats"><div class="icon">📅</div><p>No tournament history yet. Complete a tournament to see results here!</p></div>';
+    container.innerHTML = '<div class="empty-stats"><div class="icon">📅</div><p>No tournament history yet.</p></div>';
     return;
   }
 
   let html = '';
   [...weeklyHistory].reverse().forEach(week => {
-    html += `<div class="week-history-item">
-      <h3>Week ${week.week}</h3>
-      <div class="week-date">${week.date} · ${week.format.charAt(0).toUpperCase() + week.format.slice(1)} · ${week.participants.length} ${week.format === 'doubles' ? 'teams' : 'players'}</div>
-      <div class="week-champ">🏆 ${week.champion}</div>
-      <div class="week-results">
-        ${week.results.map(r => `${r.winner} <span style="color:var(--text3)">defeated</span> ${r.loser}`).join('<br>')}
-      </div>
-    </div>`;
+    html += '<div class="week-history-item"><h3>Week ' + week.week + '</h3>' +
+      '<div class="week-date">' + week.date + ' · ' + week.format.charAt(0).toUpperCase() + week.format.slice(1) + ' · ' + week.participants.length + ' ' + (week.format === 'doubles' ? 'teams' : 'players') + '</div>' +
+      '<div class="week-champ">🏆 ' + escHtml(week.champion) + '</div>' +
+      '<div class="week-results">' +
+      week.results.filter(r => !r.consolation).map(r => {
+        const score = (r.score1 !== null && r.score2 !== null) ? ' <span style="color:var(--accent);font-size:11px">(' + r.score1 + '-' + r.score2 + ')</span>' : '';
+        return escHtml(r.winner) + ' <span style="color:var(--text3)">defeated</span> ' + escHtml(r.loser) + score;
+      }).join('<br>') +
+      '</div></div>';
   });
   container.innerHTML = html;
 }
 
+// ─── PLAYER PROFILE ───
+function openProfile(name) {
+  ensurePlayerStats(name);
+  const stats = lifetimeStats[name];
+  const total = stats.wins + stats.losses;
+  const pct = total > 0 ? Math.round((stats.wins / total) * 100) : 0;
+
+  let title = 'Newcomer';
+  if (stats.championships >= 5) title = 'Hall of Famer';
+  else if (stats.championships >= 3) title = 'Dynasty Builder';
+  else if (stats.championships >= 1) title = 'Champion';
+  else if (stats.wins >= 20) title = 'Veteran';
+  else if (stats.wins >= 10) title = 'Competitor';
+  else if (pct >= 70 && total >= 5) title = 'Sharpshooter';
+
+  const modal = document.getElementById('profile-modal');
+  let html = '<button class="profile-close" onclick="closeProfile()">&times;</button>';
+  html += '<div class="profile-name">' + escHtml(name) + '</div>';
+  html += '<div class="profile-title">' + title + '</div>';
+  html += '<div class="profile-stats-grid">';
+  html += '<div class="profile-stat-box"><div class="profile-stat-val green">' + stats.wins + '</div><div class="profile-stat-label">Wins</div></div>';
+  html += '<div class="profile-stat-box"><div class="profile-stat-val red">' + stats.losses + '</div><div class="profile-stat-label">Losses</div></div>';
+  html += '<div class="profile-stat-box"><div class="profile-stat-val gold">' + (stats.championships || 0) + '</div><div class="profile-stat-label">Titles</div></div>';
+  html += '<div class="profile-stat-box"><div class="profile-stat-val">' + pct + '%</div><div class="profile-stat-label">Win Rate</div></div>';
+  html += '<div class="profile-stat-box"><div class="profile-stat-val">' + (stats.currentStreak || 0) + '</div><div class="profile-stat-label">Current Streak</div></div>';
+  html += '<div class="profile-stat-box"><div class="profile-stat-val">' + (stats.longestWinStreak || 0) + '</div><div class="profile-stat-label">Best Streak</div></div>';
+  html += '</div>';
+
+  const h2hEntries = Object.entries(stats.h2h || {}).filter(([_, r]) => r.w > 0 || r.l > 0);
+  if (h2hEntries.length > 0) {
+    html += '<div class="profile-h2h-title">Head-to-Head</div><div class="profile-h2h-list">';
+    h2hEntries.sort((a, b) => (b[1].w + b[1].l) - (a[1].w + a[1].l));
+    h2hEntries.forEach(([opp, record]) => {
+      const cls = record.w > record.l ? 'positive' : record.w < record.l ? 'negative' : 'even';
+      html += '<div class="profile-h2h-row"><span class="opp">' + escHtml(opp) + '</span><span class="record ' + cls + '">' + record.w + 'W - ' + record.l + 'L</span></div>';
+    });
+    html += '</div>';
+  }
+
+  modal.innerHTML = html;
+  document.getElementById('profile-overlay').classList.add('active');
+}
+
+function closeProfile() {
+  document.getElementById('profile-overlay').classList.remove('active');
+}
+
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function escAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 // ─── RESET ───
 function resetWeeklyStats() {
-  if (!confirm('Reset all weekly history? Lifetime stats will be kept.')) return;
+  if (!confirm('Clear all tournament history? Lifetime stats and the current bracket will be kept.')) return;
   weeklyHistory = [];
   saveData('pb_weekly', weeklyHistory);
   renderWeeklyHistory();
@@ -1416,16 +1872,30 @@ function resetAllStats() {
 // ─── NAVIGATION ───
 function showScreen(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(`screen-${name}`).classList.add('active');
+  document.getElementById('screen-' + name).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-tab')[['setup', 'bracket', 'stats'].indexOf(name)].classList.add('active');
   if (name === 'stats') showStatsView('lifetime');
-  if (name === 'bracket' && tournament) renderBracket();
+  if (name === 'bracket') {
+    updateBracketScreenState();
+    if (tournament) renderBracket();
+  }
+}
+
+function updateBracketScreenState() {
+  const empty = document.getElementById('bracket-empty');
+  const content = document.getElementById('bracket-content');
+  if (tournament) { empty.style.display = 'none'; content.style.display = ''; }
+  else { empty.style.display = ''; content.style.display = 'none'; }
 }
 
 // ─── INIT ───
 initPlayerInputs();
+const savedConsolation = loadData('pb_opt_consolation', true);
+document.getElementById('opt-consolation').checked = savedConsolation !== false;
 validateSetup();
+loadTournamentState();
+updateBracketScreenState();
 
 let _resizeTimer;
 function _handleViewportChange() {
@@ -1438,9 +1908,17 @@ function _handleViewportChange() {
 }
 window.addEventListener('resize', _handleViewportChange);
 window.addEventListener('orientationchange', () => {
-  // iOS sometimes reports stale dimensions in the immediate handler;
-  // wait for the layout to settle, then re-render.
   setTimeout(_handleViewportChange, 250);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  const champ = document.getElementById('champion-celebration');
+  if (champ.classList.contains('show')) { closeChampionCelebration(); return; }
+  const profile = document.getElementById('profile-overlay');
+  if (profile.classList.contains('active')) { closeProfile(); return; }
+  const modal = document.getElementById('modal-overlay');
+  if (modal.classList.contains('active')) { closeModal(); return; }
 });
 </script>
 </body>
