@@ -561,6 +561,139 @@
   }
   .bracket-empty button:hover { background: var(--accent2); border-color: var(--accent2); }
 
+  /* ─── ROUND ROBIN ─── */
+  .rr-section {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; margin-bottom: 16px;
+    max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .rr-section h3 {
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text3); margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .rr-round-done {
+    font-size: 10px; font-weight: 700; color: var(--green);
+    background: rgba(76,175,80,0.12); border: 1px solid rgba(76,175,80,0.25);
+    padding: 3px 10px; border-radius: 12px; letter-spacing: 1px;
+  }
+  .rr-standings { width: 100%; border-collapse: collapse; }
+  .rr-standings th {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text3); text-align: left; padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .rr-standings td {
+    padding: 10px; font-size: 14px; border-bottom: 1px solid var(--border);
+  }
+  .rr-standings tr:last-child td { border-bottom: none; }
+  .rr-standings tr.leader td { background: rgba(245,166,35,0.08); }
+  .rr-standings .rank { width: 32px; font-weight: 800; color: var(--accent); }
+  .rr-standings .wins-cell { color: var(--green); font-weight: 700; }
+  .rr-standings .losses-cell { color: var(--red); font-weight: 700; }
+
+  .rr-match-list { display: flex; flex-direction: column; gap: 8px; }
+  .rr-match {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px;
+    transition: all 0.15s;
+  }
+  .rr-match.clickable { cursor: pointer; }
+  .rr-match.clickable:hover { border-color: var(--accent); background: var(--card-hover); }
+  .rr-match.done { opacity: 0.85; }
+  .rr-match-side {
+    flex: 1; display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; min-width: 0;
+  }
+  .rr-match-side .rr-name {
+    font-weight: 600; font-size: 14px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .rr-match-side .rr-score {
+    font-weight: 800; font-size: 16px; color: var(--text3);
+    min-width: 24px; text-align: right;
+  }
+  .rr-match-side.winner .rr-name { color: var(--green); }
+  .rr-match-side.winner .rr-score { color: var(--green); }
+  .rr-match-side.loser { opacity: 0.55; }
+  .rr-vs {
+    font-size: 10px; font-weight: 700; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0;
+  }
+
+  /* ─── RECAP CARD ─── */
+  .recap-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 18px; padding: 28px; width: 440px; max-width: 92vw;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .recap-header { text-align: center; margin-bottom: 20px; }
+  .recap-title {
+    font-size: 22px; font-weight: 800; margin-bottom: 4px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .recap-date { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+  .recap-champ-row {
+    display: flex; align-items: center; gap: 16px;
+    background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(245,166,35,0.05));
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 14px; padding: 18px; margin-bottom: 18px;
+  }
+  .recap-trophy { font-size: 56px; line-height: 1; flex-shrink: 0; }
+  .recap-champ-block { flex: 1; min-width: 0; }
+  .recap-label {
+    font-size: 10px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;
+  }
+  .recap-champ-name {
+    font-size: 22px; font-weight: 800; margin-bottom: 4px;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .recap-runner { font-size: 12px; color: var(--text2); }
+  .recap-stats { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .recap-stat {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 14px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .recap-stat-label {
+    font-size: 11px; font-weight: 700; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+  }
+  .recap-stat-value {
+    font-size: 13px; font-weight: 600; text-align: right;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .recap-share-btn {
+    width: 100%; padding: 14px; border-radius: 12px; border: none;
+    background: var(--accent); color: #000; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .recap-share-btn:hover { background: var(--accent2); }
+
+  /* ─── BADGES ─── */
+  .profile-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .badge-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 999px; padding: 5px 10px;
+    font-size: 11px; font-weight: 600;
+  }
+  .badge-icon { font-size: 14px; line-height: 1; }
+  .badge-name { color: var(--text2); }
+
+  /* Achievement toast variant */
+  .toast.achievement-toast {
+    background: linear-gradient(135deg, rgba(245,166,35,0.18), var(--bg2));
+    border-color: rgba(245,166,35,0.4);
+  }
+  .toast.achievement-toast .ach-icon { font-size: 22px; }
+  .toast.achievement-toast .ach-text { font-size: 13px; color: var(--text); white-space: nowrap; }
+  .toast.achievement-toast em { font-style: normal; color: var(--accent); font-weight: 700; }
+
   /* ─── TOAST ─── */
   .toast-container {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -645,6 +778,18 @@
     .profile-stat-box { padding: 8px; }
     .profile-stat-val { font-size: 20px; }
     .h2h-grid { grid-template-columns: 1fr; }
+
+    .rr-section { padding: 14px; }
+    .rr-standings th, .rr-standings td { padding: 7px 6px; font-size: 12px; }
+    .rr-match { padding: 10px; }
+    .rr-match-side .rr-name { font-size: 13px; }
+    .rr-match-side .rr-score { font-size: 14px; }
+
+    .recap-card { padding: 20px; }
+    .recap-title { font-size: 18px; }
+    .recap-trophy { font-size: 44px; }
+    .recap-champ-name { font-size: 18px; }
+    .recap-stat-value { font-size: 12px; }
   }
 </style>
 </head>
@@ -673,6 +818,18 @@
         </button>
         <button class="format-btn" onclick="setFormat('doubles')" id="fmt-doubles">
           Doubles<small>2 vs 2</small>
+        </button>
+      </div>
+    </div>
+
+    <div class="setup-section">
+      <h2>Tournament Style</h2>
+      <div class="format-toggle">
+        <button class="format-btn active" onclick="setStyle('bracket')" id="style-bracket">
+          Bracket<small>Single elimination</small>
+        </button>
+        <button class="format-btn" onclick="setStyle('roundrobin')" id="style-roundrobin">
+          Round Robin<small>Everyone plays everyone</small>
         </button>
       </div>
     </div>
@@ -716,12 +873,14 @@
       <div class="week-info" id="bracket-week-info"></div>
       <div class="bracket-actions">
         <button class="bracket-action-btn" onclick="shareResults()">&#128228; Share Results</button>
+        <button class="bracket-action-btn" id="recap-btn" onclick="showRecap()" style="display:none;">&#127881; Recap Card</button>
       </div>
     </div>
-    <div class="bracket-wrapper">
+    <div class="bracket-wrapper" id="bracket-wrapper">
       <div class="bracket-labels" id="bracket-labels"></div>
       <div class="bracket-grid" id="bracket-container"></div>
     </div>
+    <div id="rr-area" style="display:none;"></div>
     <div id="consolation-area"></div>
     <div class="champion-display hidden" id="champion-display">
       <div class="champion-trophy">&#127942;</div>
@@ -777,12 +936,18 @@
   <div class="profile-modal" id="profile-modal"></div>
 </div>
 
+<!-- RECAP MODAL -->
+<div class="profile-modal-overlay" id="recap-overlay" onclick="if(event.target===this)closeRecap()">
+  <div class="recap-card" id="recap-card"></div>
+</div>
+
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toast-container"></div>
 
 <script>
 // ─── STATE ───
 let format = 'singles';
+let style = 'bracket'; // 'bracket' | 'roundrobin'
 let tournament = null;
 let selectedWinner = null;
 let currentMatchInfo = null;
@@ -802,9 +967,10 @@ function loadTournamentState() {
     tournament = saved.tournament;
     undoStack = Array.isArray(saved.undoStack) ? saved.undoStack : [];
     // Prime _lastChampion so a rehydrated finished tournament doesn't re-fire celebration.
-    const totalRounds = tournament.rounds.length;
-    const finalWinner = tournament.rounds[totalRounds - 1][0].winner;
-    if (finalWinner) _lastChampion = finalWinner;
+    const champion = tournament.style === 'roundrobin'
+      ? tournament.rrChampion
+      : tournament.rounds[tournament.rounds.length - 1][0].winner;
+    if (champion) _lastChampion = champion;
   }
 }
 
@@ -884,6 +1050,18 @@ function setFormat(f) {
   document.getElementById('fmt-singles').classList.toggle('active', f === 'singles');
   document.getElementById('fmt-doubles').classList.toggle('active', f === 'doubles');
   document.getElementById('doubles-note').style.display = f === 'doubles' ? 'block' : 'none';
+  saveData('pb_format', f);
+  validateSetup();
+}
+
+function setStyle(s) {
+  style = s;
+  document.getElementById('style-bracket').classList.toggle('active', s === 'bracket');
+  document.getElementById('style-roundrobin').classList.toggle('active', s === 'roundrobin');
+  // Consolation bracket only applies to bracket-style tournaments.
+  const consolWrap = document.getElementById('opt-consolation').closest('.setup-section');
+  if (consolWrap) consolWrap.style.display = s === 'bracket' ? '' : 'none';
+  saveData('pb_style', s);
   validateSetup();
 }
 
@@ -1026,68 +1204,143 @@ function startTournament() {
     participants = shuffle(playerNames);
   }
 
-  const n = participants.length;
-  const bracketSize = nextPowerOf2(n);
-  const totalRounds = Math.log2(bracketSize);
-  const byeCount = bracketSize - n;
-
-  const slots = new Array(bracketSize).fill(null);
-  if (byeCount > 0) {
-    const step = bracketSize / byeCount;
-    const byePositions = new Set();
-    for (let i = 0; i < byeCount; i++) {
-      byePositions.add(Math.round((i + 1) * step) - 1);
-    }
-    let pi = 0;
-    for (let i = 0; i < bracketSize; i++) {
-      slots[i] = byePositions.has(i) ? null : participants[pi++];
-    }
-  } else {
-    for (let i = 0; i < n; i++) slots[i] = participants[i];
-  }
-
-  const rounds = [];
-  const firstRound = [];
-  for (let i = 0; i < bracketSize; i += 2) {
-    const m = { player1: slots[i], player2: slots[i + 1], winner: null, isBye: false, score1: null, score2: null };
-    if (m.player1 === null && m.player2 === null) {
-      m.isBye = true;
-    } else if (m.player1 === null) {
-      m.winner = m.player2; m.isBye = true;
-    } else if (m.player2 === null) {
-      m.winner = m.player1; m.isBye = true;
-    }
-    firstRound.push(m);
-  }
-  rounds.push(firstRound);
-
-  for (let r = 1; r < totalRounds; r++) {
-    const prevLen = rounds[r - 1].length;
-    const thisRound = [];
-    for (let i = 0; i < prevLen; i += 2) {
-      thisRound.push({ player1: null, player2: null, winner: null, isBye: false, score1: null, score2: null });
-    }
-    rounds.push(thisRound);
-  }
-
-  propagateByes(rounds);
-
   const weekNum = weeklyHistory.length + 1;
-  const enableConsolation = document.getElementById('opt-consolation').checked;
-  tournament = {
-    rounds, participants, format,
-    week: weekNum,
-    date: new Date().toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
-    results: [],
-    consolationEnabled: enableConsolation,
-    consolation: null
-  };
+  const today = new Date().toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+  if (style === 'roundrobin') {
+    const rrRounds = generateRoundRobin(participants);
+    tournament = {
+      rounds: rrRounds, participants, format, style: 'roundrobin',
+      week: weekNum, date: today,
+      results: [],
+      rrChampion: null
+    };
+  } else {
+    const n = participants.length;
+    const bracketSize = nextPowerOf2(n);
+    const totalRounds = Math.log2(bracketSize);
+    const byeCount = bracketSize - n;
+
+    const slots = new Array(bracketSize).fill(null);
+    if (byeCount > 0) {
+      const step = bracketSize / byeCount;
+      const byePositions = new Set();
+      for (let i = 0; i < byeCount; i++) {
+        byePositions.add(Math.round((i + 1) * step) - 1);
+      }
+      let pi = 0;
+      for (let i = 0; i < bracketSize; i++) {
+        slots[i] = byePositions.has(i) ? null : participants[pi++];
+      }
+    } else {
+      for (let i = 0; i < n; i++) slots[i] = participants[i];
+    }
+
+    const rounds = [];
+    const firstRound = [];
+    for (let i = 0; i < bracketSize; i += 2) {
+      const m = { player1: slots[i], player2: slots[i + 1], winner: null, isBye: false, score1: null, score2: null };
+      if (m.player1 === null && m.player2 === null) {
+        m.isBye = true;
+      } else if (m.player1 === null) {
+        m.winner = m.player2; m.isBye = true;
+      } else if (m.player2 === null) {
+        m.winner = m.player1; m.isBye = true;
+      }
+      firstRound.push(m);
+    }
+    rounds.push(firstRound);
+
+    for (let r = 1; r < totalRounds; r++) {
+      const prevLen = rounds[r - 1].length;
+      const thisRound = [];
+      for (let i = 0; i < prevLen; i += 2) {
+        thisRound.push({ player1: null, player2: null, winner: null, isBye: false, score1: null, score2: null });
+      }
+      rounds.push(thisRound);
+    }
+
+    propagateByes(rounds);
+
+    const enableConsolation = document.getElementById('opt-consolation').checked;
+    tournament = {
+      rounds, participants, format, style: 'bracket',
+      week: weekNum, date: today,
+      results: [],
+      consolationEnabled: enableConsolation,
+      consolation: null
+    };
+  }
 
   undoStack = [];
   justAdvancedSlots.clear();
   saveTournamentState();
   renderBracket();
   showScreen('bracket');
+}
+
+// Round-robin scheduling via the circle method.
+// Returns an array of rounds, each round is an array of match objects.
+function generateRoundRobin(players) {
+  let arr = [...players];
+  const hasBye = arr.length % 2 === 1;
+  if (hasBye) arr.push(null);
+  const numPlayers = arr.length;
+  const numRounds = numPlayers - 1;
+  const halfSize = numPlayers / 2;
+  const rounds = [];
+  for (let r = 0; r < numRounds; r++) {
+    const round = [];
+    for (let i = 0; i < halfSize; i++) {
+      const p1 = arr[i];
+      const p2 = arr[numPlayers - 1 - i];
+      if (p1 !== null && p2 !== null) {
+        round.push({ player1: p1, player2: p2, winner: null, isBye: false, score1: null, score2: null });
+      }
+    }
+    rounds.push(round);
+    arr = [arr[0], arr[numPlayers - 1], ...arr.slice(1, numPlayers - 1)];
+  }
+  return rounds;
+}
+
+function computeStandings(rounds, participants) {
+  const standings = {};
+  participants.forEach(p => {
+    standings[p] = { name: p, wins: 0, losses: 0, scoredFor: 0, scoredAgainst: 0, played: 0 };
+  });
+  rounds.forEach(round => {
+    round.forEach(m => {
+      if (!m.winner) return;
+      const isP1Winner = m.winner === m.player1;
+      const win = isP1Winner ? m.player1 : m.player2;
+      const lose = isP1Winner ? m.player2 : m.player1;
+      if (!standings[win] || !standings[lose]) return;
+      standings[win].wins++; standings[win].played++;
+      standings[lose].losses++; standings[lose].played++;
+      if (m.score1 != null && m.score2 != null) {
+        const wScore = isP1Winner ? m.score1 : m.score2;
+        const lScore = isP1Winner ? m.score2 : m.score1;
+        standings[win].scoredFor += wScore;
+        standings[win].scoredAgainst += lScore;
+        standings[lose].scoredFor += lScore;
+        standings[lose].scoredAgainst += wScore;
+      }
+    });
+  });
+  const arr = Object.values(standings);
+  arr.sort((a, b) => {
+    if (b.wins !== a.wins) return b.wins - a.wins;
+    const aDiff = a.scoredFor - a.scoredAgainst;
+    const bDiff = b.scoredFor - b.scoredAgainst;
+    if (bDiff !== aDiff) return bDiff - aDiff;
+    return b.scoredFor - a.scoredFor;
+  });
+  return arr;
+}
+
+function isRoundRobinComplete() {
+  return tournament.rounds.every(r => r.every(m => m.winner));
 }
 
 function propagateByes(rounds) {
@@ -1274,9 +1527,21 @@ function renderBracketGrid(rounds, containerId, labelsId) {
 
 function renderBracket() {
   if (!tournament) return;
+  const styleLabel = tournament.style === 'roundrobin' ? 'Round Robin' : tournament.format;
   document.getElementById('bracket-title').innerHTML =
-    'Week ' + tournament.week + ' Tournament <span class="format-badge">' + tournament.format + '</span>';
+    'Week ' + tournament.week + ' Tournament <span class="format-badge">' + styleLabel + '</span>';
   document.getElementById('bracket-week-info').textContent = tournament.date;
+
+  if (tournament.style === 'roundrobin') {
+    renderRoundRobin();
+    checkChampion();
+    setTimeout(() => { justAdvancedSlots.clear(); }, 500);
+    return;
+  }
+
+  // Hide round-robin area for bracket tournaments
+  document.getElementById('rr-area').style.display = 'none';
+  document.getElementById('bracket-wrapper').style.display = '';
 
   renderBracketGrid(tournament.rounds, 'bracket-container', 'bracket-labels');
 
@@ -1302,6 +1567,84 @@ function renderBracket() {
   checkChampion();
   // Clear animation markers after render
   setTimeout(() => { justAdvancedSlots.clear(); }, 500);
+}
+
+function renderRoundRobin() {
+  const wrapper = document.getElementById('bracket-wrapper');
+  const consolArea = document.getElementById('consolation-area');
+  wrapper.style.display = 'none';
+  consolArea.innerHTML = '';
+  const rrArea = document.getElementById('rr-area');
+  rrArea.style.display = '';
+  rrArea.innerHTML = '';
+
+  // Standings
+  const standings = computeStandings(tournament.rounds, tournament.participants);
+  const stHtml = ['<div class="rr-section"><h3>Standings</h3>',
+    '<table class="rr-standings"><thead><tr><th>#</th><th>Player</th><th>W</th><th>L</th><th>+/−</th><th>PF</th></tr></thead><tbody>'];
+  standings.forEach((s, i) => {
+    const diff = s.scoredFor - s.scoredAgainst;
+    const diffStr = diff > 0 ? '+' + diff : '' + diff;
+    const cls = i === 0 && s.played > 0 ? 'leader' : '';
+    stHtml.push('<tr class="' + cls + '"><td class="rank">' + (i + 1) + '</td><td>' + escHtml(s.name) + '</td><td class="wins-cell">' + s.wins + '</td><td class="losses-cell">' + s.losses + '</td><td>' + diffStr + '</td><td>' + s.scoredFor + '</td></tr>');
+  });
+  stHtml.push('</tbody></table></div>');
+  rrArea.innerHTML = stHtml.join('');
+
+  // Rounds
+  tournament.rounds.forEach((round, rIdx) => {
+    const allDone = round.every(m => m.winner);
+    const section = document.createElement('div');
+    section.className = 'rr-section';
+    const heading = document.createElement('h3');
+    heading.textContent = 'Round ' + (rIdx + 1);
+    if (allDone) {
+      const tag = document.createElement('span');
+      tag.className = 'rr-round-done';
+      tag.textContent = 'Complete';
+      heading.appendChild(tag);
+    }
+    section.appendChild(heading);
+
+    const matchList = document.createElement('div');
+    matchList.className = 'rr-match-list';
+    round.forEach((m, mIdx) => {
+      const card = document.createElement('div');
+      card.className = 'rr-match';
+      if (m.winner) card.classList.add('done');
+      else if (m.player1 && m.player2) card.classList.add('clickable');
+
+      const left = document.createElement('div');
+      left.className = 'rr-match-side';
+      if (m.winner === m.player1) left.classList.add('winner');
+      else if (m.winner) left.classList.add('loser');
+      const leftName = document.createElement('span'); leftName.className = 'rr-name'; leftName.textContent = m.player1;
+      const leftScore = document.createElement('span'); leftScore.className = 'rr-score';
+      leftScore.textContent = m.score1 != null ? m.score1 : (m.winner === m.player1 ? 'W' : '');
+      left.appendChild(leftName); left.appendChild(leftScore);
+
+      const vs = document.createElement('div');
+      vs.className = 'rr-vs';
+      vs.textContent = 'vs';
+
+      const right = document.createElement('div');
+      right.className = 'rr-match-side';
+      if (m.winner === m.player2) right.classList.add('winner');
+      else if (m.winner) right.classList.add('loser');
+      const rightName = document.createElement('span'); rightName.className = 'rr-name'; rightName.textContent = m.player2;
+      const rightScore = document.createElement('span'); rightScore.className = 'rr-score';
+      rightScore.textContent = m.score2 != null ? m.score2 : (m.winner === m.player2 ? 'W' : '');
+      right.appendChild(rightName); right.appendChild(rightScore);
+
+      card.appendChild(left); card.appendChild(vs); card.appendChild(right);
+      if (!m.winner && m.player1 && m.player2) {
+        card.addEventListener('click', () => openModal(rIdx, mIdx, false));
+      }
+      matchList.appendChild(card);
+    });
+    section.appendChild(matchList);
+    rrArea.appendChild(section);
+  });
 }
 
 function createMatchupElement(match, roundIdx, matchIdx, isConsolation) {
@@ -1418,18 +1761,26 @@ function checkAndBuildConsolation() {
 let _lastChampion = null;
 function checkChampion() {
   if (!tournament) return;
-  const totalRounds = tournament.rounds.length;
-  const finalMatch = tournament.rounds[totalRounds - 1][0];
+  let champion = null;
+  if (tournament.style === 'roundrobin') {
+    champion = tournament.rrChampion || null;
+  } else {
+    const totalRounds = tournament.rounds.length;
+    champion = tournament.rounds[totalRounds - 1][0].winner || null;
+  }
   const champDisplay = document.getElementById('champion-display');
-  if (finalMatch.winner) {
+  const recapBtn = document.getElementById('recap-btn');
+  if (champion) {
     champDisplay.classList.remove('hidden');
-    document.getElementById('champion-name').textContent = finalMatch.winner;
-    if (_lastChampion !== finalMatch.winner) {
-      _lastChampion = finalMatch.winner;
-      showChampionCelebration(finalMatch.winner);
+    document.getElementById('champion-name').textContent = champion;
+    if (recapBtn) recapBtn.style.display = '';
+    if (_lastChampion !== champion) {
+      _lastChampion = champion;
+      showChampionCelebration(champion);
     }
   } else {
     champDisplay.classList.add('hidden');
+    if (recapBtn) recapBtn.style.display = 'none';
     _lastChampion = null;
   }
 }
@@ -1603,7 +1954,9 @@ function confirmWinner() {
   lifetimeStats[loser].h2h[selectedWinner].l++;
 
   const totalRounds = rounds.length;
-  if (roundIdx < totalRounds - 1) {
+  const isRoundRobin = tournament.style === 'roundrobin';
+
+  if (!isRoundRobin && roundIdx < totalRounds - 1) {
     const nextMatchIdx = Math.floor(matchIdx / 2);
     const nextMatch = rounds[roundIdx + 1][nextMatchIdx];
     if (matchIdx % 2 === 0) { nextMatch.player1 = selectedWinner; }
@@ -1613,28 +1966,50 @@ function confirmWinner() {
     justAdvancedSlots.add(advKey);
   }
 
-  if (!isConsolation && roundIdx === totalRounds - 1) {
+  if (!isRoundRobin && !isConsolation && roundIdx === totalRounds - 1) {
     ensurePlayerStats(selectedWinner);
     lifetimeStats[selectedWinner].championships++;
     saveTournamentToHistory();
   }
 
-  // Build consolation after first round completes
-  if (!isConsolation) checkAndBuildConsolation();
+  // Round-robin: when all matches complete, crown the standings leader.
+  if (isRoundRobin && isRoundRobinComplete() && !tournament.rrChampion) {
+    const standings = computeStandings(tournament.rounds, tournament.participants);
+    tournament.rrChampion = standings[0].name;
+    ensurePlayerStats(tournament.rrChampion);
+    lifetimeStats[tournament.rrChampion].championships++;
+    saveTournamentToHistory();
+  }
+
+  // Detect achievements for both winner and loser
+  const newBadges = detectAchievements(selectedWinner, loser, match);
+
+  // Build consolation after first round completes (bracket only)
+  if (!isRoundRobin && !isConsolation) checkAndBuildConsolation();
 
   closeModal();
   renderBracket();
   const scoreText = match.score1 !== null ? ' (' + match.score1 + '-' + match.score2 + ')' : '';
   showToast(selectedWinner + ' wins' + scoreText, 'Undo', undoLastResult);
+
+  // Stagger badge toasts so they appear after the win toast.
+  newBadges.forEach((b, i) => {
+    setTimeout(() => showAchievementToast(b.player, b.badge), 800 + i * 600);
+  });
+
   saveStats();
   saveTournamentState();
 }
 
 function saveTournamentToHistory() {
+  const champion = tournament.style === 'roundrobin'
+    ? tournament.rrChampion
+    : tournament.rounds[tournament.rounds.length - 1][0].winner;
   weeklyHistory.push({
     week: tournament.week, date: tournament.date,
     format: tournament.format,
-    champion: tournament.rounds[tournament.rounds.length - 1][0].winner,
+    style: tournament.style || 'bracket',
+    champion,
     participants: tournament.participants,
     results: tournament.results
   });
@@ -1642,6 +2017,70 @@ function saveTournamentToHistory() {
 }
 
 function saveStats() { saveData('pb_lifetime', lifetimeStats); }
+
+// ─── ACHIEVEMENTS ───
+const BADGE_CATALOG = {
+  first_win: { icon: '🌱', name: 'First Win', desc: 'Won your first match' },
+  first_title: { icon: '🏆', name: 'First Title', desc: 'Won your first tournament' },
+  dynasty: { icon: '👑', name: 'Dynasty', desc: '3+ tournament titles' },
+  streak_5: { icon: '🔥', name: 'On Fire', desc: '5-game win streak' },
+  streak_10: { icon: '⚡', name: 'Unstoppable', desc: '10-game win streak' },
+  bagel: { icon: '🥯', name: 'Skunk Master', desc: 'Won without conceding a point' },
+  century: { icon: '💯', name: 'Century', desc: '100 lifetime wins' },
+  giant_slayer: { icon: '🗡️', name: 'Giant Slayer', desc: 'Beat the all-time titles leader' }
+};
+
+function awardBadge(player, badgeId) {
+  ensurePlayerStats(player);
+  const stats = lifetimeStats[player];
+  if (!stats.badges) stats.badges = {};
+  if (stats.badges[badgeId]) return false;
+  stats.badges[badgeId] = new Date().toISOString().slice(0, 10);
+  return true;
+}
+
+function detectAchievements(winner, loser, match) {
+  const earned = [];
+  ensurePlayerStats(winner);
+  const wStats = lifetimeStats[winner];
+
+  if (wStats.wins === 1 && awardBadge(winner, 'first_win')) earned.push({ player: winner, badge: 'first_win' });
+  if (wStats.championships === 1 && awardBadge(winner, 'first_title')) earned.push({ player: winner, badge: 'first_title' });
+  if (wStats.championships >= 3 && awardBadge(winner, 'dynasty')) earned.push({ player: winner, badge: 'dynasty' });
+  if (wStats.currentStreak >= 5 && awardBadge(winner, 'streak_5')) earned.push({ player: winner, badge: 'streak_5' });
+  if (wStats.currentStreak >= 10 && awardBadge(winner, 'streak_10')) earned.push({ player: winner, badge: 'streak_10' });
+  if (wStats.wins >= 100 && awardBadge(winner, 'century')) earned.push({ player: winner, badge: 'century' });
+
+  // Bagel: opponent scored 0
+  if (match.score1 != null && match.score2 != null) {
+    const winnerScore = match.winner === match.player1 ? match.score1 : match.score2;
+    const loserScore = match.winner === match.player1 ? match.score2 : match.score1;
+    if (winnerScore > 0 && loserScore === 0 && awardBadge(winner, 'bagel')) earned.push({ player: winner, badge: 'bagel' });
+  }
+
+  // Giant slayer: winner has fewer titles than loser AND loser has the all-time most titles
+  ensurePlayerStats(loser);
+  const lStats = lifetimeStats[loser];
+  const allTimeTopTitles = Object.values(lifetimeStats).reduce((m, s) => Math.max(m, s.championships || 0), 0);
+  if ((lStats.championships || 0) >= allTimeTopTitles && allTimeTopTitles > 0 &&
+      (wStats.championships || 0) < (lStats.championships || 0) &&
+      awardBadge(winner, 'giant_slayer')) {
+    earned.push({ player: winner, badge: 'giant_slayer' });
+  }
+
+  return earned;
+}
+
+function showAchievementToast(player, badgeId) {
+  const b = BADGE_CATALOG[badgeId];
+  if (!b) return;
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast achievement-toast';
+  toast.innerHTML = '<span class="ach-icon">' + b.icon + '</span><span class="ach-text"><strong>' + escHtml(player) + '</strong> earned <em>' + b.name + '</em></span>';
+  container.appendChild(toast);
+  setTimeout(() => removeToast(toast), 5000);
+}
 
 // ─── UNDO ───
 function undoLastResult() {
@@ -1821,6 +2260,17 @@ function openProfile(name) {
   html += '<div class="profile-stat-box"><div class="profile-stat-val">' + (stats.longestWinStreak || 0) + '</div><div class="profile-stat-label">Best Streak</div></div>';
   html += '</div>';
 
+  const badgeIds = Object.keys(stats.badges || {});
+  if (badgeIds.length > 0) {
+    html += '<div class="profile-h2h-title">Achievements</div><div class="profile-badges">';
+    badgeIds.forEach(id => {
+      const b = BADGE_CATALOG[id];
+      if (!b) return;
+      html += '<div class="badge-chip" title="' + escAttr(b.desc) + '"><span class="badge-icon">' + b.icon + '</span><span class="badge-name">' + escHtml(b.name) + '</span></div>';
+    });
+    html += '</div>';
+  }
+
   const h2hEntries = Object.entries(stats.h2h || {}).filter(([_, r]) => r.w > 0 || r.l > 0);
   if (h2hEntries.length > 0) {
     html += '<div class="profile-h2h-title">Head-to-Head</div><div class="profile-h2h-list">';
@@ -1838,6 +2288,134 @@ function openProfile(name) {
 
 function closeProfile() {
   document.getElementById('profile-overlay').classList.remove('active');
+}
+
+// ─── RECAP CARD ───
+function buildRecapData() {
+  if (!tournament) return null;
+  const isRR = tournament.style === 'roundrobin';
+  const champion = isRR
+    ? tournament.rrChampion
+    : tournament.rounds[tournament.rounds.length - 1][0].winner;
+  if (!champion) return null;
+
+  // Runner-up
+  let runnerUp = null;
+  if (isRR) {
+    const standings = computeStandings(tournament.rounds, tournament.participants);
+    runnerUp = standings[1] ? standings[1].name : null;
+  } else {
+    const final = tournament.rounds[tournament.rounds.length - 1][0];
+    runnerUp = final.winner === final.player1 ? final.player2 : final.player1;
+  }
+
+  const completed = tournament.results.filter(r => !r.consolation);
+
+  // Player of the night = most wins tonight
+  const winsTonight = {};
+  const lossesTonight = {};
+  completed.forEach(r => {
+    winsTonight[r.winner] = (winsTonight[r.winner] || 0) + 1;
+    lossesTonight[r.loser] = (lossesTonight[r.loser] || 0) + 1;
+  });
+  let mvp = champion, mvpWins = winsTonight[champion] || 0;
+  Object.entries(winsTonight).forEach(([p, w]) => {
+    if (w > mvpWins || (w === mvpWins && p === champion)) { mvp = p; mvpWins = w; }
+  });
+
+  // Longest streak of the night (within the tournament's match order)
+  const streak = {};
+  let bestStreakOwner = null, bestStreakLen = 0;
+  completed.forEach(r => {
+    streak[r.winner] = (streak[r.winner] || 0) + 1;
+    streak[r.loser] = 0;
+    if (streak[r.winner] > bestStreakLen) {
+      bestStreakLen = streak[r.winner];
+      bestStreakOwner = r.winner;
+    }
+  });
+
+  // Closest match (smallest score gap among completed-with-scores)
+  let closest = null;
+  let blowout = null;
+  completed.forEach(r => {
+    if (r.score1 == null || r.score2 == null) return;
+    const gap = Math.abs(r.score1 - r.score2);
+    if (closest === null || gap < closest.gap) closest = { ...r, gap };
+    if (blowout === null || gap > blowout.gap) blowout = { ...r, gap };
+  });
+
+  return {
+    week: tournament.week, date: tournament.date,
+    style: isRR ? 'Round Robin' : 'Bracket',
+    format: tournament.format,
+    champion, runnerUp,
+    matchesPlayed: completed.length,
+    mvp, mvpWins,
+    bestStreakOwner, bestStreakLen,
+    closest, blowout
+  };
+}
+
+function showRecap() {
+  const data = buildRecapData();
+  if (!data) { showToast('No recap available yet'); return; }
+  const card = document.getElementById('recap-card');
+  let html = '<button class="profile-close" onclick="closeRecap()">&times;</button>';
+  html += '<div class="recap-header"><div class="recap-title">Week ' + data.week + ' Recap</div>';
+  html += '<div class="recap-date">' + escHtml(data.date) + ' · ' + escHtml(data.format) + ' · ' + data.style + '</div></div>';
+  html += '<div class="recap-champ-row"><div class="recap-trophy">🏆</div><div class="recap-champ-block"><div class="recap-label">Champion</div><div class="recap-champ-name">' + escHtml(data.champion) + '</div>';
+  if (data.runnerUp) html += '<div class="recap-runner">Runner-up: ' + escHtml(data.runnerUp) + '</div>';
+  html += '</div></div>';
+
+  html += '<div class="recap-stats">';
+  html += recapStatHTML('Matches played', data.matchesPlayed);
+  if (data.mvp && data.mvpWins > 0) html += recapStatHTML('Player of the night', data.mvp + ' (' + data.mvpWins + 'W)');
+  if (data.bestStreakOwner && data.bestStreakLen >= 2) html += recapStatHTML('Hottest streak', data.bestStreakOwner + ' (' + data.bestStreakLen + ' in a row)');
+  if (data.closest) html += recapStatHTML('Closest match', data.closest.winner + ' def. ' + data.closest.loser + ' (' + data.closest.score1 + '–' + data.closest.score2 + ')');
+  if (data.blowout && data.blowout.gap >= 5) html += recapStatHTML('Biggest blowout', data.blowout.winner + ' def. ' + data.blowout.loser + ' (' + data.blowout.score1 + '–' + data.blowout.score2 + ')');
+  html += '</div>';
+
+  html += '<button class="recap-share-btn" onclick="shareRecap()">Share recap</button>';
+  card.innerHTML = html;
+  document.getElementById('recap-overlay').classList.add('active');
+}
+
+function recapStatHTML(label, value) {
+  return '<div class="recap-stat"><div class="recap-stat-label">' + escHtml(label) + '</div><div class="recap-stat-value">' + escHtml(String(value)) + '</div></div>';
+}
+
+function closeRecap() {
+  document.getElementById('recap-overlay').classList.remove('active');
+}
+
+function shareRecap() {
+  const data = buildRecapData();
+  if (!data) return;
+  let text = '🏓 Pickleball — Week ' + data.week + ' Recap\n';
+  text += data.date + ' · ' + data.format + ' · ' + data.style + '\n\n';
+  text += '🏆 Champion: ' + data.champion + '\n';
+  if (data.runnerUp) text += '🥈 Runner-up: ' + data.runnerUp + '\n';
+  text += '\nMatches played: ' + data.matchesPlayed + '\n';
+  if (data.mvp && data.mvpWins > 0) text += 'Player of the night: ' + data.mvp + ' (' + data.mvpWins + 'W)\n';
+  if (data.bestStreakOwner && data.bestStreakLen >= 2) text += 'Hottest streak: ' + data.bestStreakOwner + ' (' + data.bestStreakLen + ')\n';
+  if (data.closest) text += 'Closest match: ' + data.closest.winner + ' def. ' + data.closest.loser + ' (' + data.closest.score1 + '–' + data.closest.score2 + ')\n';
+  if (data.blowout && data.blowout.gap >= 5) text += 'Biggest blowout: ' + data.blowout.winner + ' def. ' + data.blowout.loser + ' (' + data.blowout.score1 + '–' + data.blowout.score2 + ')\n';
+
+  function copyFallback() {
+    if (!navigator.clipboard) { showToast('Sharing not supported on this device'); return; }
+    navigator.clipboard.writeText(text)
+      .then(() => showToast('Recap copied to clipboard'))
+      .catch(() => showToast('Could not copy recap'));
+  }
+  if (navigator.share) {
+    navigator.share({ title: 'Pickleball Recap', text }).catch((err) => {
+      if (err && err.name === 'AbortError') return;
+      copyFallback();
+    });
+  } else {
+    copyFallback();
+  }
 }
 
 function escHtml(s) {
@@ -1893,6 +2471,10 @@ function updateBracketScreenState() {
 initPlayerInputs();
 const savedConsolation = loadData('pb_opt_consolation', true);
 document.getElementById('opt-consolation').checked = savedConsolation !== false;
+const savedFormat = loadData('pb_format', null);
+if (savedFormat === 'doubles' || savedFormat === 'singles') setFormat(savedFormat);
+const savedStyle = loadData('pb_style', null);
+if (savedStyle === 'bracket' || savedStyle === 'roundrobin') setStyle(savedStyle);
 validateSetup();
 loadTournamentState();
 updateBracketScreenState();
@@ -1915,6 +2497,8 @@ document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
   const champ = document.getElementById('champion-celebration');
   if (champ.classList.contains('show')) { closeChampionCelebration(); return; }
+  const recap = document.getElementById('recap-overlay');
+  if (recap.classList.contains('active')) { closeRecap(); return; }
   const profile = document.getElementById('profile-overlay');
   if (profile.classList.contains('active')) { closeProfile(); return; }
   const modal = document.getElementById('modal-overlay');
